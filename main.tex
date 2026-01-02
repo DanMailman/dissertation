@@ -1,0 +1,55 @@
+% ============================================================================
+% main.tex  —  Composition Root / “main()”
+% ============================================================================
+\documentclass[12pt,letterpaper,oneside,openany]{book}
+\input{preamble}
+
+\begin{document}
+	% ============================================================================
+	% UTC FRONT MATTER (IN ORDER)
+	% ============================================================================
+	\pagenumbering{roman}   		% switch to roman
+	\setcounter{page}{1}			% committee page is i but hidden
+	\DisableBottomCenterPageNumbers
+	\CommitteeAndRepPage     		% FM-01: Committee & Univ Rep Page
+	\TitlePage               		% FM-02: Title Page
+	\CopyrightPage           		% FM-03: Copyright Page
+	\AbsDedAckPage{ABSTRACT}{\input{frontmatter/abstract.tex}}
+	\AbsDedAckPage{DEDICATION}{\input{frontmatter/dedication.tex}}
+	\AbsDedAckPage{ACKNOWLEDGMENTS}{\input{frontmatter/acknowledgements.tex}}
+	\TableOfContentsPage     % FM-07: TOC
+	\ListOfTablesPage        % FM-08: LOT
+	\ListOfFiguresPage       % FM-09: LOF
+	\ListOfAbbreviationsPage % FM-10: LOA
+	\ListOfSymbolsPage       % FM-11: LOS
+	\AddToCChapterLabel
+%	% ============================================================================
+%	% BODY
+%	% ============================================================================
+	\MainMatterBegin
+	\glsresetall % Reset “first use” tracking so Chapter I can introduce acronyms cleanly even if they were used in Abstract/Acknowledgements.
+	\include{chapters/ch01-introduction}
+%	\input{chapters/ch02-background}
+%	\input{chapters/ch03-case-study}
+%	\input{chapters/ch04-algorithm-design}
+%	\input{chapters/ch05-implementation}
+%	\input{chapters/ch06-app-typology}
+%	\input{chapters/ch07-conclusion}
+	\PrintReferences
+
+%	% =========================
+%	% APPENDICES
+%	% =========================
+	\setcounter{tocdepth}{0}
+	\AddToCAppendixLabel
+	\appendix
+%	\input{appendices/appA-user-manual}
+%	\input{appendices/appB-another-appendix}
+	\include{appendices/A-smoke-tests}
+%	% =========================
+%	% VITA
+%	% =========================
+	\cleardoublepage
+	\backmatter
+	\include{chapters/99-vita}
+\end{document}

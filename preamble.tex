@@ -1,0 +1,795 @@
+% === DOCBLOCK 01 BEGIN: Core packages ===
+\usepackage[letterpaper,left=1in,right=1in,top=1in,bottom=1.8in,footskip=0.8in,headheight=24pt,headsep=0pt]{geometry} % page size + margins; geometry is your “single source of truth”
+\usepackage{setspace}  												% \singlespacing etc.; controls baseline spacing cleanly
+\usepackage{eso-pic}   												% place objects on page background (headers/footers overlays, etc.)
+\usepackage{enumitem}  												% precise list control (indent, label, spacing, nesting depth)
+\setlistdepth{6}       												% allow deeper list nesting (enumitem must be loaded first)
+\usepackage{indentfirst}		 									% indent first paragraph after headings (LaTeX default is no indent)
+% === DOCBLOCK 01 END ===
+
+% === DOCBLOCK 02 BEGIN: Fonts + bullets + graphics + underlining + tables ===
+
+% --- Fonts (XeLaTeX) ---------------------------------------------------------
+\usepackage{fontspec}  												% use system fonts (Times New Roman, Arial, etc.) with XeLaTeX
+\defaultfontfeatures{Ligatures=TeX} 								% traditional TeX ligature mapping (`` '' --- etc.)
+\setmainfont{Times New Roman} 										% main (roman) text font
+\setsansfont{Arial}       					    					% sans-serif font
+\setmonofont{Courier New}     										% monospace / code font
+% --- CJK (Chinese) -----------------------------------------------------------
+\usepackage{xeCJK}													% Use xeCJK so XeLaTeX applies correct CJK spacing/line-breaking rules.
+\setCJKmainfont{Noto Serif SC}
+\newcommand{\DocDefaultFont}{\normalfont\normalsize\selectfont} 	% handy “reset to default font” macro
+
+% --- Graphics + underline ----------------------------------------------------
+\usepackage{graphicx}         										% \includegraphics
+\usepackage[normalem]{ulem}   										% \uline underline; [normalem] prevents \emph from becoming underline
+\graphicspath{{media/}}       										% search <root>/media for graphics, so you can write \includegraphics{image4}
+
+% --- Doc-controlled lengths --------------------------------------------------
+\newlength{\DocDefaultBaselineSkip} 								% custom baseline skip length you control elsewhere
+\newlength{\DocListOuterSep}        								% custom list outer separation length you control elsewhere
+
+% --- Tables (pandoc/booktabs style) -----------------------------------------
+\usepackage{booktabs}         										% \toprule \midrule \bottomrule for professional tables
+\usepackage{array}            										% column modifiers like >{...}, plus \arraybackslash
+\usepackage{calc}             										% length arithmetic like (\columnwidth - 2\tabcolsep) * ...
+\newcommand{\real}[1]{#1}     										% helper for pandoc-generated decimal factors in calc expressions
+% === DOCBLOCK 02 END ===
+
+% === DOCBLOCK 03 BEGIN: List policy ===
+\newcommand{\ApplyDocListSpacing}{%
+	% Make all itemize lists single-spaced (while body stays double-spaced)
+	\setlist[itemize]{%
+		before=\begin{singlespace*},
+			after=\end{singlespace*},
+		itemsep=0pt, parsep=0pt, topsep=\baselineskip,	partopsep=0pt,
+	}
+	\setlist[itemize,1]{label=\textbullet, left=0.5in..0.75in}
+	\setlist[itemize,2]{label=\textbullet, left=0in..0.25in}
+	\setlist[itemize,3]{label=\textbullet, left=0in..0.25in}
+	\setlist[itemize,4]{label=\textbullet, left=0in..0.25in}
+	% Global enumerate policy
+	\setlist[enumerate]{before=\begin{singlespace*}, after=\end{singlespace*}, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, align=right, labelsep=0.12in }
+	% Level 1 (outer list)
+	\setlist[enumerate,1]{topsep=\baselineskip, labelindent=0pt, labelwidth=0.25in, leftmargin=0.75in, label=\arabic*.}
+	% Levels 2–4 (nested)
+	\setlist[enumerate,2]{labelindent=0pt, labelwidth=0.13in, leftmargin=0.25in, label=(\alph*), topsep=\baselineskip, after=\vspace{-\baselineskip}\end{singlespace*}}
+	\setlist[enumerate,3]{labelindent=0pt, labelwidth=0.13in, leftmargin=0.25in, label=\roman*., topsep=\baselineskip, after=\vspace{-\baselineskip}\end{singlespace*}}
+	\setlist[enumerate,4]{labelindent=0pt, labelwidth=0.13in, leftmargin=0.25in, label=\Alph*., topsep=\baselineskip, after=\vspace{-\baselineskip}\end{singlespace*}}
+}
+% === DOCBLOCK 03 END ===
+
+% === DOCBLOCK 04 BEGIN: Page numbers + headings ===
+\newsavebox{\PageNumBox}
+\newcommand{\EnableBottomCenterPageNumbers}{%
+	\AddToShipoutPictureFG{%
+		\AtPageLowerLeft{%
+			\begingroup
+			\sbox{\PageNumBox}{\rmfamily\normalsize\thepage}%
+			% bottom of numeral is exactly 1in above paper bottom:
+			\raisebox{\dimexpr 1in+\dp\PageNumBox\relax}{%
+				\makebox[\paperwidth][c]{\usebox{\PageNumBox}}%
+			}%
+			\endgroup
+		}%
+	}%
+}
+
+% Optional (handy later)
+\newcommand{\DisableBottomCenterPageNumbers}{\ClearShipoutPictureFG}
+% Don’t let class/page styles print anything (we’re doing it ourselves).
+\pagestyle{empty}
+\newcommand{\DocTitle}{Gesture-Efficient Global Language Input Methods}
+\newcommand{\DocAuthor}{Daniel Mailman}
+\newsavebox{\TitleBox}
+\savegeometry{NormalPageGeom}
+\newgeometry{left=1in,right=1in,top=0in,bottom=1.8in,footskip=0.8in,headheight=24pt,headsep=0pt}
+\savegeometry{TopEdgePageGeom}
+\loadgeometry{NormalPageGeom}
+\newcommand{\UseNormalPageGeom}{\loadgeometry{NormalPageGeom}}
+\newcommand{\UseTopEdgePageGeom}{\loadgeometry{TopEdgePageGeom}}
+\newcommand{\VSpaceFromTop}[1]{\vspace*{\dimexpr #1-\topskip\relax}} 	% Place baseline at an absolute distance from physical top (TopEdgePageGeom assumed).
+% --- Front-matter heading: top of CAPS exactly 2in from physical top ----------
+\newlength{\FrontCapHeight}
+\settoheight{\FrontCapHeight}{\normalsize X}
+\newcommand{\FrontHeadingTwoInches}[1]{%
+	\begingroup
+	\singlespacing
+	\sbox{\TitleBox}{\normalsize\MakeUppercase{#1}}%
+	% NormalPageGeom: top of text area is 1in from physical top.
+	% Want TOP OF CAPS at 2in => baseline at (2in - capheight).
+	% Relative to text-area top: (2in - capheight) - 1in = 1in - capheight.
+	\vspace*{\dimexpr 1in - \FrontCapHeight - \topskip\relax}%
+	\noindent\makebox[\linewidth][c]{\usebox{\TitleBox}}\par
+	\endgroup
+}
+% === DOCBLOCK 04 END ===
+
+% === DOCBLOCK 05 BEGIN: Chapter headings ===
+% ============================================================================
+% Main-matter chapter headings (book.cls)
+%   - Header at 2" from top (reuse \FrontHeadingTwoInches)
+%   - One single-spaced blank line between header and title
+%   - Two single-spaced blank lines between title and body
+%   - Header + title in ALL CAPS, default font/size
+%   - Uses \@chapapp so appendices become "APPENDIX A" automatically
+% ============================================================================
+\makeatletter
+
+\def\@makechapterhead#1{%
+	\begingroup
+	\singlespacing
+	% (2) header position + (5) caps in default font
+	\FrontHeadingTwoInches{\@chapapp\space\thechapter}%
+	% (3) one single-spaced blank line
+	\vspace{\baselineskip}%
+	% (5) title all caps, default font/size, centered
+	\noindent\makebox[\linewidth][c]{\normalsize\normalfont\MakeUppercase{#1}}\par
+	% (4) two single-spaced blank lines before body
+	\vspace{2\baselineskip}%
+	\endgroup
+	% restore doc spacing for body text
+	\DocDefaultSpacing
+}
+
+\def\@makeschapterhead#1{%
+	\begingroup
+	\singlespacing
+	\FrontHeadingTwoInches{#1}%
+	\vspace{2\baselineskip}%
+	\endgroup
+	\DocDefaultSpacing
+}
+
+\makeatother
+% === DOCBLOCK 05 END ===
+
+% === DOCBLOCK 06 BEGIN: Default spacing + helpers ===
+\newlength{\SavedFootskip}
+\newcommand{\RestoreFootskipAtShipout}{\setlength{\footskip}{\SavedFootskip}}
+
+\newcommand{\DocDefaultSpacing}{%
+	\setstretch{2}\selectfont
+	\setlength{\parindent}{0.5in}%
+	\setlength{\parskip}{0pt}%
+	\setlength{\DocDefaultBaselineSkip}{\baselineskip}%
+	\setlength{\DocListOuterSep}{0.5\DocDefaultBaselineSkip}%
+	\setlength{\DocTOCBlankSkip}{0.5\DocDefaultBaselineSkip}%
+}
+
+
+\newcommand{\AbsDedAckPage}[2]{%
+	% --- Abstract / Dedication / Acknowledgements page ----------------------------
+	% #1 = title text, #2 = content (usually \input{...})
+	\clearpage
+	\UseNormalPageGeom
+	\thispagestyle{empty}% you handle page numbers via your shipout overlay
+	\addcontentsline{toc}{frontmatter}{#1}%
+	\FrontHeadingTwoInches{#1}%
+	\vspace{2\baselineskip}% exactly two blank lines after the heading
+	 \DocDefaultSpacing   % <-- guarantee body text returns to default here
+	#2%
+}
+% === DOCBLOCK 06 END ===
+\newcommand{\VSpaceDoubleLines}[1]{\begingroup\begin{spacing}{2}\vspace{#1\baselineskip}\end{spacing}\endgroup}
+\newlength{\TitleTopWhiteSpace}
+\setlength{\TitleTopWhiteSpace}{2in}
+\newlength{\TitleTopAdjust}
+\setlength{\TitleTopAdjust}{-13pt} % your desired value
+
+% === DOCBLOCK 07 BEGIN: Front matter 01 committee ===
+%% ============================================================================
+%% Front Matter 01 (1 Page) - Committee and University Representative Page
+%% ============================================================================
+\newcommand{\CommitteeAndRepPage}{%
+	\DisableBottomCenterPageNumbers
+	\newcommand{\CommitteeLeftOneName}{Dalei Wu}
+	\newcommand{\CommitteeLeftOneTitle}{Associate Professor of Computer Science}
+	\newcommand{\CommitteeLeftOneRole}{(Chair)}
+	\newcommand{\CommitteeRightOneName}{Cuilan Gao}
+	\newcommand{\CommitteeRightOneTitle}{Associate Professor of Mathematics}
+	\newcommand{\CommitteeRightOneRole}{(Committee Member)}
+	\newcommand{\CommitteeLeftTwoName}{Yingfeng Wang}
+	\newcommand{\CommitteeLeftTwoTitle}{Associate Professor of Computer Science}
+	\newcommand{\CommitteeLeftTwoRole}{(Committee Member)}
+	\newcommand{\CommitteeRightTwoName}{Yu Liang}
+	\newcommand{\CommitteeRightTwoTitle}{Professor of Computer Science}
+	\newcommand{\CommitteeRightTwoRole}{(Committee Member)}
+	\newlength{\CommitteeLeftW}
+	\newlength{\CommitteeRightW}
+	\newlength{\CommitteeGap}
+	\newcommand{\SetupCommitteeWidths}{%
+		\settowidth{\CommitteeLeftW}{\normalsize\CommitteeLeftOneTitle}%
+		\settowidth{\CommitteeRightW}{\normalsize\CommitteeRightOneTitle}%
+		\setlength{\CommitteeGap}{\dimexpr\linewidth-\CommitteeLeftW-\CommitteeRightW\relax}%
+	}
+	\clearpage
+	\UseTopEdgePageGeom
+	\thispagestyle{empty}
+	\SetupCommitteeWidths
+	\begingroup
+	\sbox{\TitleBox}{\normalsize\MakeUppercase{\DocTitle}}%
+	\VSpaceFromTop{\TitleTopWhiteSpace + \TitleTopAdjust + \ht\TitleBox}%
+	\noindent\makebox[\linewidth][c]{\usebox{\TitleBox}}\par
+	\endgroup
+	\VSpaceDoubleLines{4}
+	{\centering
+		By\\[\baselineskip]
+		\DocAuthor\par
+	}
+	\VSpaceDoubleLines{4}
+	\noindent
+	\begin{minipage}[t]{\CommitteeLeftW}\raggedright
+		\singlespacing
+			\CommitteeLeftOneName\\
+			\CommitteeLeftOneTitle\\
+			\CommitteeLeftOneRole
+	\end{minipage}%
+	\hspace{\CommitteeGap}%
+	\begin{minipage}[t]{\CommitteeRightW}\raggedright
+		\singlespacing
+			\CommitteeRightOneName\\
+			\CommitteeRightOneTitle\\
+			\CommitteeRightOneRole
+	\end{minipage}\par
+	\vspace{1\baselineskip}
+	\noindent
+	\begin{minipage}[t]{\CommitteeLeftW}\raggedright
+		\singlespacing
+			\CommitteeLeftTwoName\\
+			\CommitteeLeftTwoTitle\\
+			\CommitteeLeftTwoRole
+	\end{minipage}%
+	\hspace{\CommitteeGap}%
+	\begin{minipage}[t]{\CommitteeRightW}\raggedright
+		\singlespacing
+			\CommitteeRightTwoName\\
+			\CommitteeRightTwoTitle\\
+			\CommitteeRightTwoRole
+	\end{minipage}\par
+}%
+% === DOCBLOCK 07 END ===
+
+% === DOCBLOCK 08 BEGIN: Front matter 02 title ===
+% ============================================================================
+% Front Matter 02 (1 Page) - Title Page (number "ii")
+% ============================================================================
+\newcommand{\UniversityName}{The University of Tennessee at Chattanooga}
+\newcommand{\UniversityLocation}{Chattanooga, Tennessee}
+\newcommand{\AwardMonthYear}{May 2026} % No comma; allowed: May/August/December
+\newcommand{\DegreeName}{Doctor of Philosophy}
+\newcommand{\DocumentType}{Dissertation} % "Thesis" or "Dissertation"
+\newcommand{\CopyrightYear}{\the\year}
+\newcommand{\TitlePage}{%
+	\clearpage
+	\EnableBottomCenterPageNumbers
+	\UseTopEdgePageGeom
+	\thispagestyle{empty}
+
+	% ---- Title: baseline positioned from physical top edge (your existing mechanism) ----
+	\begingroup
+	\singlespacing
+	\sbox{\TitleBox}{\normalsize\MakeUppercase{\DocTitle}}%
+	\VSpaceFromTop{\TitleTopWhiteSpace + \TitleTopAdjust + \ht\TitleBox}%
+	\noindent\makebox[\linewidth][c]{\usebox{\TitleBox}}\par
+	\endgroup
+
+	% ---- Line-counted layout below ----
+	\begin{spacing}{1}
+		{\centering
+			% 10 lines between title and By
+			\vspace{10\baselineskip}
+
+			By\par
+			% 1 line between By and name
+			\vspace{1\baselineskip}
+
+			\DocAuthor\par
+			% 10 lines between name and submission block
+			\vspace{10\baselineskip}
+
+			% Submission block: single spaced
+			\begin{spacing}{1}
+				A \DocumentType\ Submitted to the Faculty of the University of\\
+				Tennessee at Chattanooga in Partial\\
+				Fulfillment of the Requirements of the Degree\\
+				of \DegreeName\par
+			\end{spacing}
+
+			% 4 lines before University/Location
+			\vspace{4\baselineskip}
+
+			\UniversityName\par
+			\UniversityLocation\par
+
+			% 1 line before date
+			\vspace{1\baselineskip}
+
+			\AwardMonthYear\par
+		}
+	\end{spacing}
+
+	\UseNormalPageGeom
+}%
+% === DOCBLOCK 08 END ===
+
+% === DOCBLOCK 09 BEGIN: Front matter 03 copyright ===
+% ============================================================================
+% Front Matter 03 (1 Page) Copyright Page (number "iii")
+% ============================================================================
+\newcommand{\CopyrightPage}{%
+		\clearpage
+		% For this page we measure from the physical top edge.
+		\UseTopEdgePageGeom
+		\thispagestyle{empty}
+		\begingroup
+		% Avoid first-line/topskip surprises: for this page, treat "top of text area"
+		% as the physical top edge.
+		\topskip=0pt
+		% Build the 3-line block exactly as required.
+		% NOTE: line 2 is "By Daniel Mailman" on ONE line (copyright page only).
+		\setbox0=\vbox{%
+				\hsize=\linewidth
+				\centering
+				\begin{spacing}{2}
+						Copyright \textcopyright\ \CopyrightYear\par
+						By \DocAuthor\par
+						All Rights Reserved\par
+					\end{spacing}
+		}%
+		% Center the *box* on the physical page:
+		% top of box = (paperheight - boxheight)/2
+		\vspace*{\dimexpr 0.5\paperheight - 0.5\ht0 - 0.5\dp0\relax}%
+		\noindent\box0\par
+		\endgroup
+}
+% === DOCBLOCK 09 END ===
+
+% === DOCBLOCK 10 BEGIN: Glossaries + TOC engine ===
+% ============================================================================
+% Glossaries (Acronyms) — no-index workflow
+% ============================================================================
+\usepackage[acronym,nonumberlist,nopostdot]{glossaries-extra}
+\makenoidxglossaries 	% Use glossaries' “no-index” mode:
+
+% =============================================================================
+% TOC layout: fixed title columns + right-aligned numbers, no overlays
+% =============================================================================
+\makeatletter
+
+% --- tiny debug helper: writes to .log only (toggle by changing body) ---------
+%\newcommand{\TOCDBG}[1]{\typeout{TOCDBG: #1}}
+% If you want to turn debug off later, just change to:
+\newcommand{\TOCDBG}[1]{}
+
+% --- “Character unit” for column math (measured in the TOC font) --------------
+\newlength{\DocTOCChar}          % width of "0"
+\newlength{\DocTOCDotW}          % width of '.'
+
+% --- Tunables ----------------------------------------------------------------
+\newlength{\DocTOCLeftPad}       % left margin -> start of number-field area
+\newlength{\DocTOCTitleGap}      % '.' -> title gap
+
+% --- Derived positions -------------------------------------------------------
+\newlength{\DocTOCNumFieldWidth} % width of widest chapter number (e.g. "88")
+\newlength{\DocTOCTitlePos}      % where chapter/section titles start
+\newlength{\DocTOCSubsecTitlePos}% where subsection titles start
+
+% --- Vertical spacing rule: blank after blocks, not before -------------------
+\newlength{\DocTOCBlankSkip}
+\newif\ifDocTOCPrevWasSublevel
+\DocTOCPrevWasSublevelfalse
+
+\newcommand*\DocTOCMaybeAddBlankSkip{%
+	\ifDocTOCPrevWasSublevel
+	\addvspace{\DocTOCBlankSkip}%
+	\global\DocTOCPrevWasSublevelfalse
+	\fi
+}
+
+% --- Compute all TOC positions in the actual TOC font ------------------------
+\newcommand*\DocInitTOCPositions{%
+	\rmfamily\normalfont\normalsize
+	% Measure “character” and dot widths in the TOC font
+	\setbox0=\hbox{0}\setlength{\DocTOCChar}{\wd0}%
+	\setbox0=\hbox{.}\setlength{\DocTOCDotW}{\wd0}%
+	% Single-spaced vertical blank
+	\setlength{\DocTOCBlankSkip}{\baselineskip}%
+	% Tunables: 3 character units
+	\setlength{\DocTOCLeftPad}{3\DocTOCChar}%
+	\setlength{\DocTOCTitleGap}{3\DocTOCChar}%
+	% Number field: allow up to two-digit chapters: "88"
+	\setbox0=\hbox{88}\setlength{\DocTOCNumFieldWidth}{\wd0}%
+	% Column where chapter and section titles start:
+	%   <3spaces> <num field> '.' <3spaces> <Title>
+	\setlength{\DocTOCTitlePos}{%
+		\dimexpr
+		\DocTOCLeftPad
+		+ \DocTOCNumFieldWidth
+		+ \DocTOCDotW
+		+ \DocTOCTitleGap
+		\relax}%
+	% Subsection titles start 3 spaces further right
+	\setlength{\DocTOCSubsecTitlePos}{%
+		\dimexpr\DocTOCTitlePos + 3\DocTOCChar\relax}%
+	% --- DEBUG readout so we know what we actually computed ---
+	\TOCDBG{InitTOC: Char=\the\DocTOCChar, DotW=\the\DocTOCDotW,%
+		LeftPad=\the\DocTOCLeftPad, TitleGap=\the\DocTOCTitleGap,%
+		NumField=\the\DocTOCNumFieldWidth,%
+		TitlePos=\the\DocTOCTitlePos, SubsecPos=\the\DocTOCSubsecTitlePos}%
+}
+
+% -----------------------------------------------------------------------------
+% CHAPTER entries (includes appendices):
+%   "   1.   Title"
+%   - Arabic chapter numbers (possibly double digit) are right-aligned in the
+%     number field; '.' and title column are fixed.
+%   - One single-spaced blank line after each chapter/appendix entry.
+% -----------------------------------------------------------------------------
+\renewcommand*\l@chapter[2]{%
+	\TOCDBG{l@chapter: "#1" page #2; TitlePos=\the\DocTOCTitlePos}%
+	\ifnum\c@tocdepth>-1\relax
+	\DocTOCMaybeAddBlankSkip
+	\begingroup
+	\setstretch{1}%
+	% Redefine \numberline just for this chapter entry:
+	\renewcommand*\numberline[1]{%
+		\hb@xt@\DocTOCTitlePos{%
+			\hspace*{\DocTOCLeftPad}%         <3 spaces>
+			\hb@xt@\DocTOCNumFieldWidth{\hfil ##1}% right-aligned number
+			.\hspace*{\DocTOCTitleGap}%       '.' + <3 spaces>
+		}%
+	}%
+	\@dottedtocline{0}{0pt}{\DocTOCTitlePos}{#1}{#2}%
+	\addvspace{\DocTOCBlankSkip}% single blank line after chapter
+	\global\DocTOCPrevWasSublevelfalse
+	\endgroup
+	\fi
+}
+
+% -----------------------------------------------------------------------------
+% SECTION entries:
+%   - Unnumbered in display (we hide 1.1 etc.)
+%   - Title starts in the SAME column as chapter titles.
+%   - No blank lines before/after; only the *next* top-level entry
+%     (chapter/divider/frontmatter) will insert a blank after the group.
+% -----------------------------------------------------------------------------
+\renewcommand*\l@section[2]{%
+	\TOCDBG{l@section: "#1" page #2; TitlePos=\the\DocTOCTitlePos}%
+	\ifnum\c@tocdepth>0\relax
+	\begingroup
+	\setstretch{1}%
+	% Eat number box but reserve width so text column stays fixed
+	\renewcommand*\numberline[1]{\hb@xt@\@tempdima{}}%
+	\@dottedtocline{1}{0pt}{\DocTOCTitlePos}{#1}{#2}%
+	\global\DocTOCPrevWasSubleveltrue
+	\endgroup
+	\fi
+}
+
+% -----------------------------------------------------------------------------
+% SUBSECTION entries:
+%   - Unnumbered in display.
+%   - Title starts 3 “spaces” to the right of section titles.
+% -----------------------------------------------------------------------------
+\renewcommand*\l@subsection[2]{%
+	\TOCDBG{l@subsection: "#1" page #2; SubsecPos=\the\DocTOCSubsecTitlePos}%
+	\ifnum\c@tocdepth>1\relax
+	\begingroup
+	\setstretch{1}%
+	\renewcommand*\numberline[1]{\hb@xt@\@tempdima{}}%
+	\@dottedtocline{2}{0pt}{\DocTOCSubsecTitlePos}{#1}{#2}%
+	\global\DocTOCPrevWasSubleveltrue
+	\endgroup
+	\fi
+}
+
+% --- Front-matter entry type -------------------------------------------------
+\providecommand*{\toclevel@frontmatter}{0}
+
+\providecommand*\l@frontmatter[2]{%
+	\TOCDBG{l@frontmatter: "#1" page #2}%
+	\DocTOCMaybeAddBlankSkip
+	\begingroup
+	\setstretch{1}%
+	% Front-matter entries: flush-left, no number block.
+	\@dottedtocline{0}{0pt}{0pt}{#1}{#2}%
+	\endgroup
+	\addvspace{\DocTOCBlankSkip}% one blank line after each front-matter entry
+}
+
+% --- Divider words like "CHAPTERS", "APPENDICES" -----------------------------
+\newcommand*\l@tocdivider[2]{%
+	\DocTOCMaybeAddBlankSkip
+	\par\noindent\normalfont #1\par
+	\addvspace{\DocTOCBlankSkip}%
+}
+
+\makeatother
+
+% === DOCBLOCK 10 END ===
+
+% === DOCBLOCK 11 BEGIN: LOF/LOT entry formatting ===
+\makeatletter
+
+% Debug helper (can silence later if desired)
+\newcommand{\LOXDBG}[1]{\typeout{LOXDBG: #1}}
+
+% Core line formatter for LOF/LOT:
+%  - First line flush-left
+%  - Wrapped lines hang at 0.5in
+%  - Dot leaders to right-aligned page number
+\newcommand*\DocLoXLine[2]{%
+	\par
+	\begingroup
+	\parindent=0pt
+	\leftskip=0pt
+	% continuation lines only:
+	\hangindent=0.5in
+	\hangafter=1
+	% page-number box and dot leaders (LaTeX-native style)
+	\rightskip=\@pnumwidth plus 1fil
+	\parfillskip=-\@pnumwidth
+	\leavevmode
+	#1\nobreak
+	\leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill
+	\nobreak\hb@xt@\@pnumwidth{\hfil #2}\par
+	\endgroup
+}
+
+% LIST OF FIGURES entries
+%  - 1 blank line between entries
+%  - number and caption inline on first line
+%  - hanging indent at 0.5in for wrapped text
+\renewcommand*\l@figure[2]{%
+	\LOXDBG{figure entry: "#1" page #2}%
+	\addvspace{\baselineskip}% one single-spaced blank line between entries
+	\begingroup
+	% When the .lof line is read, it contains \numberline{<num>}<caption>.
+	% Redefine \numberline so it just prints "<num> " inline before the caption.
+	\renewcommand\numberline[1]{##1\enspace}%
+	\DocLoXLine{#1}{#2}%
+	\endgroup
+}
+
+% LIST OF TABLES entries (same policy as figures)
+\renewcommand*\l@table[2]{%
+	\LOXDBG{table entry: "#1" page #2}%
+	\addvspace{\baselineskip}% one single-spaced blank line between entries
+	\begingroup
+	\renewcommand\numberline[1]{##1\enspace}%
+	\DocLoXLine{#1}{#2}%
+	\endgroup
+}
+
+\makeatother
+% === DOCBLOCK 11 END ===
+
+% === DOCBLOCK 12 BEGIN: TOC/LOF/LOT pages + symbols ===
+\makeatletter
+	\newcommand{\AddToCChapterLabel}{%
+		\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}%
+		\addtocontents{toc}{\protect\contentsline{tocdivider}{CHAPTERS}{}{}}%
+	}
+	\newcommand{\AddToCAppendixLabel}{%
+		\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}%
+		\addtocontents{toc}{\protect\contentsline{tocdivider}{APPENDICES}{}{}}%
+	}
+
+	\newcommand{\TableOfContentsPage}{%
+		\clearpage
+		\UseNormalPageGeom
+		\thispagestyle{empty}%
+		\FrontHeadingTwoInches{TABLE OF CONTENTS}%
+		\vspace{2\baselineskip}% <-- two blank lines after the TOC heading
+		\begingroup
+		\rmfamily\normalfont\normalsize
+		\singlespacing
+		\setlength{\parskip}{0pt}
+		\setlength{\parindent}{0pt}
+		\DocInitTOCPositions
+		\@starttoc{toc}%
+		\DocTOCMaybeAddBlankSkip
+		\endgroup
+	}
+	\newcommand{\ListOfTablesPage}{%
+		\clearpage
+		\UseNormalPageGeom
+		\thispagestyle{empty}%
+		\addcontentsline{toc}{frontmatter}{LIST OF TABLES}%
+		\FrontHeadingTwoInches{LIST OF TABLES}%
+		\begingroup
+		\rmfamily\normalfont\normalsize
+		\singlespacing
+		\setlength{\parindent}{0pt}
+		\setlength{\parskip}{0pt}
+		\vspace*{\baselineskip}			% 2nd blank line between title and content
+		\@starttoc{lot}%
+		\endgroup
+	}
+
+	\newcommand{\ListOfFiguresPage}{%
+		\clearpage
+		\UseNormalPageGeom
+		\thispagestyle{empty}%
+		\addcontentsline{toc}{frontmatter}{LIST OF FIGURES}%
+		\FrontHeadingTwoInches{LIST OF FIGURES}%
+		\begingroup
+		\rmfamily\normalfont\normalsize
+		\singlespacing
+		\setlength{\parindent}{0pt}
+		\setlength{\parskip}{0pt}
+		\vspace*{\baselineskip}			% 2nd blank line between title and content
+		\@starttoc{lof}%
+		\endgroup
+	}
+
+
+	\newcommand{\ListOfSymbolsPage}[1][]{%
+		\clearpage
+		\UseNormalPageGeom
+		\thispagestyle{empty}%
+		\addcontentsline{toc}{frontmatter}{LIST OF SYMBOLS}%
+		\FrontHeadingTwoInches{LIST OF SYMBOLS}%
+		\begin{singlespace}
+			\setlength{\parindent}{0pt}
+			\printnoidxglossary[type=symbols,style=los-style]
+			#1%
+		\end{singlespace}
+	}
+\makeatother
+% === DOCBLOCK 12 END ===
+% === DOCBLOCK 13 BEGIN: Glossary styles + MainMatterBegin ===
+% -ish LOA formatting: "SHORT, Long form" one per line, no page numbers
+\newglossarystyle{loa-style}{%
+	\setglossarystyle{list}	% Base style: a simple list environment (label + item text)
+	\renewcommand*{\glossarysection}[2][]{}% Suppress the default heading normally generated for a glossary.
+	\renewcommand*{\glossarypreamble}{}%% Suppress any preamble text inserted before the list.
+	\renewcommand*{\glossentry}[2]{%% ##1 = entry label (internal key), ##2 is typically page list (unused here)
+		\item[\glsentryshort{##1},] \glsentrylong{##1}%% Print format:%   LABEL:  short form + comma TEXT :  long form
+	}%
+	\renewcommand*{\glsgroupskip}{}% Suppress extra vertical space between alphabetic groups.
+}
+% --- Glossaries: symbols ------------------------------------------------------
+\newglossary*{symbols}{List of Symbols}
+\newglossarystyle{los-style}{%
+	\setglossarystyle{list}%
+	\renewcommand*{\glossarysection}[2][]{}%
+	\renewcommand*{\glossarypreamble}{}%
+	\renewcommand*{\glossentry}[2]{%
+		\item[\glsentryname{##1},] \glsentrydesc{##1}%
+	}%
+	\renewcommand*{\glsgroupskip}{}%
+}
+% Load symbol entries (may be a superset; only referenced ones will print)
+\input{frontmatter/acronyms}
+\input{frontmatter/symbols}
+\newcommand{\ListOfAbbreviationsPage}[1][]{%
+	\clearpage
+	\UseNormalPageGeom
+	\thispagestyle{empty}%
+	% If you haven't defined \l@frontmatter yet, use {chapter} for now (see note below).
+	\addcontentsline{toc}{frontmatter}{LIST OF ABBREVIATIONS}%
+	\FrontHeadingTwoInches{LIST OF ABBREVIATIONS}%
+	\begin{singlespace}
+		\setlength{\parindent}{0pt}
+		% Primary source: acronyms defined via \newacronym / \newabbreviation.
+		% Printed as: "ABBR, Full Term" (no page numbers).
+		\printnoidxglossary[type=\acronymtype,style=loa-style]
+		% Optional manual additions (normally leave empty):
+		#1
+	\end{singlespace}
+	% Reset "first use" flags so acronyms expand on first use in the main matter.
+	\glsresetall
+}
+% ============================================================================
+% Main matter switch (front matter -> chapters)
+% ============================================================================
+\newcommand{\MainMatterBegin}{%
+	\clearpage
+	\pagenumbering{arabic}%
+	\renewcommand{\thechapter}{\arabic{chapter}}%
+	\setcounter{secnumdepth}{3}% number down to subsubsection
+	\setcounter{page}{1}%
+	\EnableBottomCenterPageNumbers%
+	\setcounter{tocdepth}{2}% show sections/subsections in main-matter TOC
+}
+% === DOCBLOCK 13 END ===
+% === DOCBLOCK 14 BEGIN: Section heading formats ===
+\makeatletter
+\renewcommand\section{%
+	\@startsection{section}{1}{\z@}%
+	{-3.5ex \@plus -1ex \@minus -.2ex}%
+	{2.3ex \@plus .2ex}%
+	{\DocDefaultFont\bfseries\raggedright}%
+}
+
+\renewcommand\subsection{%
+	\@startsection{subsection}{2}{\z@}%
+	{-3.25ex \@plus -1ex \@minus -.2ex}%
+	{1.5ex \@plus .2ex}%
+	{\DocDefaultFont\bfseries\centering}%
+}
+
+\renewcommand\subsubsection{%
+	\@startsection{subsubsection}{3}{\z@}%
+	{-3.25ex \@plus -1ex \@minus -.2ex}%
+	{1.5ex \@plus .2ex}%
+	{\DocDefaultFont\bfseries\itshape\centering}%
+}
+
+\makeatother
+% === DOCBLOCK 14 END ===
+% === DOCBLOCK 15 BEGIN: Bib + PrintReferences + debug ===
+% ============================================================================
+% Bibliography (biblatex/biber) — supports "REFERENCES" + "WORKS CONSULTED"
+% ============================================================================
+\usepackage[backend=biber,style=authoryear,sorting=nyt]{biblatex}
+% --- Force DOI/URL onto their own lines in the bibliography ---
+\DeclareFieldFormat{doi}{%
+	\newline\mkbibacro{DOI}\addcolon\space
+	\ifhyperref
+	{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+	{\nolinkurl{#1}}%
+}
+\DeclareFieldFormat{url}{%
+	\newline\mkbibacro{URL}\addcolon\space\url{#1}%
+}
+% Point this at your actual .bib file:
+% (e.g. references-dissertation.bib, references.bib, etc.)
+\addbibresource{REFERENCE.bib}
+% Track which entries were actually cited
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+% ============================================================================
+% References printing (non-scr, heading 2 inches from top)
+% ============================================================================
+\newcommand{\PrintReferences}{%
+	\nocite{*}%
+	% -------------------- Cited works only (REFERENCES) --------------------
+	\clearpage
+	\UseNormalPageGeom
+	\thispagestyle{empty}%
+	\addcontentsline{toc}{frontmatter}{REFERENCES}%
+	\FrontHeadingTwoInches{REFERENCES}%
+	\begingroup
+	\begin{singlespace}
+		\printbibliography[heading=none,category=cited]
+	\end{singlespace}
+	\endgroup
+
+	% -------------------- Uncited works only (WORKS CONSULTED) -------------
+	\clearpage
+	\UseNormalPageGeom
+	\thispagestyle{empty}%
+	\addcontentsline{toc}{frontmatter}{WORKS CONSULTED}%
+	\FrontHeadingTwoInches{WORKS CONSULTED}%
+	\begingroup
+	\begin{singlespace}
+		\printbibliography[heading=none,notcategory=cited]
+	\end{singlespace}
+	\endgroup
+}
+\AtBeginDocument{
+	\DocDefaultSpacing
+	\ApplyDocListSpacing
+}
+%\makeatletter
+%\let\Old@startsection\@startsection
+%\def\@startsection#1#2#3#4#5#6{%
+%	\typeout{HEADING-DBG (#1): font=\fontname\font}%
+%	\Old@startsection{#1}{#2}{#3}{#4}{#5}{#6}%
+%}
+\makeatother
+\makeatletter
+\newcommand{\DBGListGlue}{%
+	\typeout{LISTDBG depth=\the\@listdepth
+		topsep=\the\topsep
+		partopsep=\the\partopsep
+		itemsep=\the\itemsep
+		parsep=\the\parsep
+		parskip=\the\parskip
+		baselineskip=\the\baselineskip}%
+}
+\makeatother
+%=== DOCBLOCK 15 END ===

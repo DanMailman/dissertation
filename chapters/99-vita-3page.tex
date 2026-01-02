@@ -1,0 +1,72 @@
+
+% chapters/99-vita.tex
+% -----------------------------------------------------------------------------
+% VITA (final dissertation section)
+% - Uses unnumbered chapter so it does not appear as "Chapter X"
+% - Adds entry to Table of Contents as a chapter-level item
+% - Written to avoid inventing specifics not established in our chats
+% -----------------------------------------------------------------------------
+
+\cleardoublepage
+\chapter*{VITA}
+\addcontentsline{toc}{chapter}{VITA}
+\markboth{VITA}{VITA}
+
+% If your dissertation body is double-spaced, this will match it.
+% If UTC requires single-spaced vita, uncomment the next line:
+% \singlespacing
+
+Dan Mailman is a computer scientist whose work sits at the intersection of human--computer interaction, computational linguistics, and language technology, with a particular focus on gesture-efficient input methods for Unicode-rich languages. His dissertation, \textit{Gesture-Efficient Global Language Input Methods}, develops a research and engineering agenda for building input systems that reduce gesture cost while preserving learnability and long-term expert performance.
+
+\UTCOneSingleBlank
+
+\textbf{Education.}
+Dan is completing the Ph.D.\ in Computer Science at the University of Tennessee at Chattanooga (UTC). His doctoral work integrates design, implementation, and evaluation of high-efficiency text input systems, with emphasis on multilingual coverage (including Mandarin) and practical deployment concerns such as usability, error handling, and reproducible evaluation pipelines.
+
+\UTCOneSingleBlank
+
+\textbf{Research interests.}
+Dan’s research emphasizes high-efficiency text input and the measurement of efficiency in ways that reflect real human performance. In his work, ``high efficiency'' is framed primarily as characters-per-gesture (or fractional gestures per character), secondarily as memorability and learnability that enables speed growth over time (including touch-typing skill acquisition), and tertiarily as the relative physical effort of gestures and selections across symbols and keys. His broader interests include gesture and grid-based IME design for multilingual and symbol-heavy writing systems; evaluation methodology for input systems (speed, accuracy, learnability, and robustness); and reliable, reproducible pipelines for producing and publishing complex technical documents.
+
+\UTCOneSingleBlank
+
+\textbf{Dissertation and core technical work.}
+Dan’s dissertation is closely tied to a family of prototypes exploring structured input spaces and hierarchical navigation as a pathway to speed and expressiveness.
+
+\UTCOneSingleBlank
+
+\textit{µLex (framework concept).}
+A gesture-efficient multilingual input-method framework aimed at global language coverage, especially for languages with large inventories and symbol-dense writing. µLex is positioned as both a research direction and a product-oriented design framework for systematically creating high-efficiency input methods rather than treating each language as a one-off engineering effort.
+
+\UTCOneSingleBlank
+
+\textit{muWords (prototype line).}
+A grid-based user interface driven by a CSV ``GridSpec'' mapping from prefix identifiers to word lists. The interaction model distinguishes shortpress (word insertion into a text box) from longpress (prefix accumulation) to enable dynamic switching among grid layouts. This work foregrounds repeatable, testable interaction patterns (press start, release, cancel, hover) and disciplined state handling, enabling incremental refactoring toward clarity and maintainability.
+
+\UTCOneSingleBlank
+
+\textit{muCiYu (Mandarin adaptation).}
+A Mandarin-focused prototype that adapts the grid/prefix concept for Chinese words and phrases using a \texttt{muCiYu.csv} file with columns \texttt{GridID}, \texttt{Lex}, and \texttt{Frq}. The design includes hierarchical navigation through tiered GridIDs (e.g., \texttt{fu}, \texttt{fu(1)}, \texttt{fu(2)}), navigation cells such as ``上页'' and ``下页'' when tiers exist, and a dedicated bottom-right cell tied to the \texttt{/} key where shortpress inserts \texttt{/} and longpress triggers ``设置'' or ``重启'' depending on context. The prototype is built to fail fast: if the CSV contains errors, processing halts and reports the issues clearly.
+
+\UTCOneSingleBlank
+
+\textbf{Additional research and applied systems.}
+Beyond IME work, Dan has pursued systems that connect language technology to real-world workflows. He has explored standards-alignment and educational NLP through a content standards cross-matching concept that uses retrieval and embedding-based methods to align K--12 standards and lesson materials. In parallel, he has developed and refined reproducible publishing workflows bridging Quarto (RStudio) and \LaTeX{}, aiming for a single-source pipeline that renders cleanly to both HTML and PDF and scales to dissertation-length documents.
+
+\UTCOneSingleBlank
+
+\textbf{Professional and entrepreneurial work.}
+Dan’s conversations reflect active engagement with applied educational technology and long-term plans to commercialize language-input research. He is employed at Great Minds PBC and has explored corporate structuring and commercialization paths under Language Genies, Inc.\ (LGI), including questions of organizational form, licensing flows, and funding strategies that support durable, user-facing language technology systems.
+
+\UTCOneSingleBlank
+
+\textbf{Technical strengths and tooling.}
+Dan’s work spans research, software engineering, and production-quality technical documentation. He routinely uses JavaScript for interactive web prototypes and UI state management; R/RStudio and Quarto for analysis and publishing; and \LaTeX{} (KOMA-Script) with \texttt{biblatex}/\texttt{biber} for dissertation production. Across projects he emphasizes modular design, explicit naming conventions, unified input handlers for mouse and keyboard interactions, and data-driven configuration pipelines (e.g., CSV-driven layouts) to keep interaction logic scalable and maintainable.
+
+\UTCOneSingleBlank
+
+\textbf{Orientation and approach.}
+Dan’s work is characterized by an emphasis on agency, builder-mindedness, and concrete systems that make difficult problems tractable. He prefers language that highlights authorship and construction and aims to produce tools that users can learn, trust, and use at speed. His research agenda and engineering practice are oriented toward real deployment: correctness, reproducibility, and user-centered design are treated as first-class constraints rather than afterthoughts.
+
+% If you need to force the vita to end on a new page:
+% \cleardoublepage

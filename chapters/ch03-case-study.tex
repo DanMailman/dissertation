@@ -1,0 +1,207 @@
+% Auto-converted from Optimizing_Gestural_Efficiency.docx via pandoc
+% Source section: Case Study and Representative
+Application
+\chapter{Case Study and Representative Application}\label{case-study-and-representative-application}
+
+To facilitate easily-learned, gesture-efficient, on-demand non-qwerty
+input, \emph{\textbf{µLex}} input applications should enable:
+
+\begin{itemize}
+\item
+  Easy switching between qwerty and non-qwerty.
+\item
+  `Touch typing' non-qwerty with high Gestural Efficiency.
+\item
+  Accessibility via keyboards, mice, and other input peripherals
+\item
+  Qwerty access to non-qwerty characters
+\end{itemize}
+
+In the most general statement, and because the keyboard is among the
+most ubiquitous input peripherals, the non-qwerty input problem reduces
+to presenting \uline{qwerty-accessible} choices that result in the
+highest number of non-qwerty characters for the fewest gestures. The
+general strategy for optimizing the solution is to present choice sets
+of multi-character non-qwerty lexemes - rather than single characters -
+for selection.
+
+To initiate discussion, consider the example of laptop users in the
+field of linguistics writing papers in English about aspects of Chinese.
+For this example, most user time and effort are spent on word processor
+GUIs occupying monitors (Figure 15, left) and most of the document text
+is English, input using laptop keyboards. Periodically, and for
+relatively short periods of time, users input Chinese instead of
+English. For this use case, the non-qwerty input set is Mandarin
+characters and lexemes.
+
+Three resources are used to implement the \emph{\textbf{µLex}} strategy:
+
+\begin{itemize}
+\item
+  A set of Chinese characters, optionally with frequencies
+\item
+  A Chinese lexeme frequency list
+\item
+  A method for mapping qwerty characters to Chinese characters and
+  lexemes
+\end{itemize}
+
+\section{\texorpdfstring{ Chinese Character (Frequency)
+Lists}{ Chinese Character (Frequency) Lists}}\label{chinese-character-frequency-lists}
+
+Given the productive nature of language, no Chinese lexicon includes
+every possible lexeme. To enter lexemes not in the source frequency
+list, \textbf{\emph{µ}短语}enables input of individual \textbf{汉字}
+(`hànzì', \textbackslash Chinese characters\textbackslash). The
+character frequency lists used in this research are from (Da, 2004). For
+completeness, an additional list without frequencies that has all
+individual Unicodes with a pīnyīn pronunciation is generated
+programmatically.
+
+To indicate available non-lexeme \textbf{汉字}, \textbf{\emph{µ}短语}
+suffixes the green corner display text with a `+'.
+
+For this research, the Unicode standard is used as the resource for the
+complete set of Mandarin characters.
+
+\section{Chinese Lexemes Frequency Lists From Internet Corpora
+Research}\label{chinese-lexemes-frequency-lists-from-internet-corpora-research}
+
+Lexeme frequency lists can be made using readily available tools.
+(Baroni \& Kilgarriff, 2006). The two Mandarin frequency lists used for
+this research are \href{http://corpus.leeds.ac.uk/frqc/lcmc.num}{The
+Lancaster Corpus of Mandarin Chinese} (\textbf{LCMC},
+\textasciitilde5,000 lexemes) (McEnery \& Xiao, 2004) and
+\href{http://corpus.leeds.ac.uk/frqc/internet-zh.num}{Chinese Internet
+Corpus} (\textbf{CIC}, \textasciitilde50,000 lexemes) (Sharoff, 2006).
+
+\section{Pīnyīn Maps QWERTY to Chinese Character
+Pronunciation}\label{pux12bnyux12bn-maps-qwerty-to-chinese-character-pronunciation}
+
+The most widely used system for representing Chinese pronunciation is
+the pīnyīn system, all of the non-tone characters for which are on the
+qwerty keyboard (Her, 2005).
+
+\section{\texorpdfstring{Example \emph{µLex} App for Chinese Lexical
+Input}{Example µLex App for Chinese Lexical Input}}\label{example-uxb5lex-app-for-chinese-lexical-input}
+
+\textbf{\emph{µ}短语} (mu-duǎnyǔ) - a family of \emph{\textbf{µLex}}
+Chinese lexical input applications \textbf{--} vary with the frequency
+lists used to generate them. Figure 14 shows the initial grid display
+for a `small' version based on LCMC which is used as the basis for this
+research. A larger version, based on CIC, is used for comparison
+purposes.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=4.81042in,height=1.37361in]{media/media/image10.emf}
+\caption{\emph{µ}\textbf{短语} Initial Supplemental Display for Chinese Lexical Input}
+\label{fig:auto:1}
+\end{figure}
+
+
+\section{\texorpdfstring{Enabling and Disabling
+\textbf{\emph{µ}短语} with \emph{Long-press}
+}{Enabling and Disabling µ短语 with Long-press }}\label{enabling-and-disabling-uxb5ux77edux8bed-with-long-press}
+
+For the example use case, an always-visible \textbf{\emph{µ}短语} grid
+is unnecessary and potentially distracting. So, \textbf{\emph{µ}短语}
+increases usability by making it easy to \textbf{\uline{enable}} and
+\textbf{\uline{disable}} (\emph{~}Figure 14 and Figure 15, red ellipse).
+Enabling \textbf{\emph{µ}短语} is done via \emph{\textbf{activation}} or
+\emph{\textbf{toggling}}. If it is being used for the first time since
+boot, users \textbf{\uline{activate}} by selecting an item in an OS
+menu. If the software is already \textbf{\uline{active}},
+\emph{\textbf{long-press}} of the \textbf{\textless/\textgreater{}} key
+\textbf{\uline{toggles it on}} (\emph{\textbf{show}}) and
+\textbf{\uline{toggles it off}} (\emph{\textbf{hide}}).
+\textbf{\uline{Deactivation}} is via mouse-clickable selections accessed
+through the blue corner cell. Since \textbf{activation} gesture is via
+the OS, \textbf{show} and \textbf{hide} are via
+\emph{\textbf{long-press}}, and \textbf{deactivate} is via
+\textbf{\emph{µ}短语}'s grid, none of these interfere with the GFAs of
+concurrently running applications.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=6.24638in,height=1.7963in]{media/media/image11.emf}
+\caption{\textbf{\emph{µ}短语} Supplements Other Apps to Provide Chinese Lexical Input}
+\label{fig:auto:2}
+\end{figure}
+
+
+\section{\texorpdfstring{Using \textbf{\emph{µ}短语} for Selecting
+Lexemes}{Using µ短语 for Selecting Lexemes}}\label{using-uxb5ux77edux8bed-for-selecting-lexemes}
+
+\paragraph{Select the Most Frequently Used Lexemes with 1
+Gesture}\label{select-the-most-frequently-used-lexemes-with-1-gesture}
+
+The initial \emph{µ}\textbf{短语} display shows the most frequently used
+lexemes according to the source corpus. When the grid is visible, users
+select lexemes by mouse-clicking their cells or by
+\emph{\textbf{long-pressing}} keys with marks indicated in blue (Figure
+14, red circle). For example, typing \textbf{\textless K\textgreater{}}
+in the usual manner inputs lowercase a and \emph{\textbf{long-pressing}}
+\textbf{\textless K\textgreater{}} inputs lexeme\textbf{这}
+(\textbackslash zhè\textbackslash). By using long-press,
+\emph{µ}\textbf{短语} does not interfere with existing word-processing
+GFAs. Feedback via highlight (Figure 14, yellow) indicates crossing the
+\emph{\textbf{long-press}} interval threshold.
+
+Another example: to input \textbf{的} (`de`,
+\textbackslash possessive\textbackslash), users press
+\textbf{\textless A\textgreater{}} until the cell highlights, and it is
+input upon release of the key.
+
+The GE for any single-character lexeme in the \textbf{\emph{µ}短语}grid
+is 1.00 and the GE for \textbf{一个} (`yīgè') is 2.00. This contrasts
+with the Microsoft Pinyin IME where the number of gestures to input
+\textbf{的}varies from 2 (\textbf{d},
+\textbf{\textless enter\textgreater{}}) to 3 (\textbf{d}, \textbf{e},
+\textbf{1}) with corresponding GEs of 0.50 and 0.33, not including the
+gestures necessary to switch between English and Chinese. The lexemes on
+the initial display account for 18.69\% of written Chinese according to
+LCMC.
+
+\paragraph{\texorpdfstring{Select the Next Most Frequently Used Lexemes
+with 2 Gestures
+}{Select the Next Most Frequently Used Lexemes with 2 Gestures }}\label{select-the-next-most-frequently-used-lexemes-with-2-gestures}
+
+To input lexemes not on the initial display, users
+\textbf{\textless shift\textgreater{}} \emph{\textbf{long-press}} the
+lexeme's first pīnyīn. So, to input \textbf{时候 (}`shíhòu'
+\textbackslash when\textbackslash), users:
+
+\begin{itemize}
+\item
+  \textbf{\textless shift\textgreater{} \emph{Long-press}}
+  \textbf{\textless S\textgreater{}} to update the display (Figure 3)
+\item
+  \emph{\textbf{Long-press}} \textbf{\textless P\textgreater{}} to input
+  the lexeme
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=4.83333in,height=1.41875in]{media/media/image12.emf}
+\caption{: Grid of Most Frequently Used Lexemes with Pronunciations Beginning with S}
+\label{fig:auto:3}
+\end{figure}
+
+
+There are 658 frequently used lexemes that can be similarly selected
+with 2 gestures. The average GE for all 2-gesture lexemes is 0.80. and
+2-gesture lexemes account for 25.78\% of written Chinese. So, 44.47\% of
+written Chinese can be input with 2 or fewer gestures.
+
+\paragraph{66\% of Written Chinese in 4 or Fewer
+Gestures}\label{of-written-chinese-in-4-or-fewer-gestures}
+
+\includegraphics[width=4.21in,height=2.29in]{media/media/image13.emf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+\end{enumerate}

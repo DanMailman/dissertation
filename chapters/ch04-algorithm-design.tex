@@ -1,0 +1,313 @@
+% Auto-converted from Optimizing_Gestural_Efficiency.docx via pandoc
+% Source section: Algorithm and Design
+Concepts
+\chapter{Algorithm and Design Concepts}\label{algorithm-and-design-concepts}
+
+\section{The Algorithm}\label{the-algorithm}
+INPUTS
+
+Vectors
+
+Name Elements Ordered By Input/Calculated
+
+vLexeme: Vector of Lexemes ordered by Corpus Frequency
+
+vLexon: Vector of Lexon ordered by Corpus Frequency
+
+vQwerty: Vector of Qwerty symbols ordered by `User Convenience'
+
+\section{Prefix Match versus Exact
+Match}\label{prefix-match-versus-exact-match}
+
+\section{Prefixes are GridNames}\label{prefixes-are-gridnames}
+\section{User-Convenience
+Ordering}\label{user-convenience-ordering}
+
+\section{Proof of Correctness}\label{proof-of-correctness}
+\section{Proof of Termination}\label{proof-of-termination}
+Alphabetical(TouchTyping), HomeRow(Effort), KbdPosition(Location)
+
+\section{Reasonability of the Measure for Gestural
+Efficiency}\label{reasonability-of-the-measure-for-gestural-efficiency}
+
+\section{Minimizing Interference with Target
+Apps}\label{minimizing-interference-with-target-apps}
+
+\emph{\textbf{µLex}}'s \emph{raison d'être} is enabling non-QWERTY
+lexical input GFAs (see section 2.7) for \textbf{\uline{other}} apps,
+such as word processors and email managers. In OS terms, other apps for
+which \emph{\textbf{µLex}} provides supplemental GFAs keep
+\emph{\textbf{focus}}. Since \emph{\textbf{µLex}} apps work in
+conjunction with focus apps, \emph{\textbf{µLex}} GFAs must not
+interfere with focus app GFAs. To minimize interference:
+
+\begin{itemize}
+\item
+  \textbf{DC01}: \emph{\textbf{µLex}} apps are not running by default.
+\item
+  \textbf{DC02}: Potentially interfering gestures are only active when
+  \emph{\textbf{µLex}} is toggled on.
+\item
+  \textbf{DC03}: Toggling \emph{\textbf{µLex}} is only possible with
+  gestures unused by focus apps.
+\end{itemize}
+
+\section{\texorpdfstring{ Non-Interference via Activation and
+Toggle (DC01,
+DC04)}{ Non-Interference via Activation and Toggle (DC01, DC04)}}\label{non-interference-via-activation-and-toggle-dc01-dc04}
+
+\section{\texorpdfstring{\emph{\textbf{µLex}} Supplemental Displays
+Prompt
+Selections}{µLex Supplemental Displays Prompt Selections}}\label{uxb5lex-supplemental-displays-prompt-selections}
+
+When \textbf{\emph{µ}短语} is active, cells indicate which lexemes can
+be input with gestures. Blue letters indicate keyboard gestures and cell
+positions indicate mouse gestures. If chordsets are used, the
+\textbf{\emph{µ}短语} display is supplemented with chordmaps. Chordmaps
+indicates GFAs mapping finger combinations to lexemes. So, when
+\textbf{\emph{µ}短语} is toggled on, the lexeme \textbf{为} (wèi
+`because of') can be input three ways:
+
+\begin{itemize}
+\item
+  via keyboard, by actuating lowercase-z.
+\item
+  via mouse, by clicking the containing region.
+\item
+  via chordset, by chording thumb, ring, and little fingers.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=6.5in,height=2.48403in]{media/media/image14.emf}
+\caption{Chordmaps Indicate Chordset GFAs}
+\label{fig:auto:1}
+\end{figure}
+
+
+\section{\texorpdfstring{\emph{\textbf{µLex}} Supplemental Actuation
+Methods Enable Alternative
+Selections}{µLex Supplemental Actuation Methods Enable Alternative Selections}}\label{uxb5lex-supplemental-actuation-methods-enable-alternative-selections}
+
+\emph{\textbf{µLex}} provides special actuation methods for mice,
+keyboards, and chordsets to enable users seamlessly to alternate between
+focus app GFAs and \emph{\textbf{µLex}} GFAs.
+
+\emph{\textbf{µLex}} apps coexist with and supplement apps such as word
+processors and spreadsheets to allow users easily to input non-QWERTY
+lexemes.
+
+The white and cyan \emph{\textbf{cells}} in the initial
+\textbf{\emph{µ}短语} display \emph{\textbf{grid}} enables users to
+input the 30 most common lexemes (accounting for 33\% of lexical input)
+with a single \textbf{\uline{primary}} gesture.
+
+For mice, users move the cursor over a selection
+
+\section{DC01: Supplement Existing Apps and
+Devices}\label{dc01-supplement-existing-apps-and-devices}
+
+To not interfere with keyboard accelerators and other keyboard GFAs,
+\emph{\textbf{µLex}} software supplements devices with an additional
+alternative actuation: \emph{\textbf{long press}} (sustaining actuation
+for more than the length of time for a normal key press). One use of
+long press is to toggle \emph{\textbf{µLex}} software availability. For
+example, to alternate between English and Chinese lexical input, users
+long press the \textbf{/} key, which shows or hides the supplemental
+\emph{\textbf{grid}} of \emph{\textbf{cells}} shown in Figure 14.
+
+When the display is toggled off (hidden), the keyboard behaves normally;
+letter, number, and punctuation keys input their characters to the
+currently active app. When the display is toggled on (visible), keys
+(parenthesized blue) are used for selecting the indicated Chinese
+lexemes into the currently active app. For example, Figure 14 indicates
+actuating the 1 key inputs \textbf{的} (the most frequently used Chinese
+lexeme). Input of Chinese lexemes not shown in Figure 14 will be
+discussed later.
+
+(Figure 18). In the display (Figure 18, right) the gestures are 31
+different combinations of actuated fingers. Each combination is
+associated with a \emph{\textbf{chordmap}} ((Figure 18, center)
+indicating the fingers to be pressed and (simultaneously) released. The
+display grid associates chordmaps with Chinese characters pronounced
+\emph{\textbf{shì}}. To input characters, users actuate chords (Figure
+18, left/green) indicated by chordmaps.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=6.5in,height=2.26736in]{media/media/image15.emf}
+\caption{Sample \emph{\textbf{µLex}} Display for Chinese Input}
+\label{fig:auto:2}
+\end{figure}
+
+
+What distinguishes the keyboard from other devices is the
+\textbf{\uline{marks}} on the keys. The marks constitute a display of
+user choices\emph{\textbf{.}} For devices that don't have marks (e.g.,
+mice, chordsets) the apps themselves present GUI displays for their
+usage. For mice, the display is often the GUI itself, For
+non-positional, unmarked devices an additional display must be provided
+to For devices other than the keyboard it is trivial to supplement
+existing apps with a display.
+
+Every GUI-based app that takes lexical input (e.g., email, word
+processing) is a potential \emph{\textbf{client}} for
+\emph{\textbf{µLex}} software. Many clients have gestures
+
+so, \emph{\textbf{µLex}} must operate cooperatively with its clients. In
+particular \emph{\textbf{µLex}} gestures must be different from gestures
+already used by the clients.
+
+\section{Long Press -- A Supplemental Alternative
+Actuation}\label{long-press-a-supplemental-alternative-actuation}
+
+As a springboard example, \textbf{\emph{µ}Letras} is a
+\emph{\textbf{µLex}} app that enables users to input non-QWERTY Spanish
+characters from a keyboard with a gestural efficiency of 1. The
+essential problem addressed by \textbf{\emph{µ}Letras} is that many
+characters used in Spanish documents are not available on the QWERTY
+keyboard. Solving the problem is simplified by the observation that
+effectively all non-QWERTY characters are in 1-to-1 correspondence with
+QWERTY marks.
+
+The solution is made harder by the variety and multiplicity of keyboard
+accelerators in software apps via alternative actuations of many keys.
+For example
+\textbf{\textless ctrl\textgreater-\textless a\textgreater{}} in
+Microsoft word invokes the command `select all text in document'; so,
+\textbf{\textless ctrl\textgreater-\textless a\textgreater{}} cannot be
+used to insert characters. Similarly, alternative actuations using
+combinations of \textless alt\textgreater, \textless esc\textgreater,
+\textless ctrl\textgreater, and \textless shift\textgreater{} with other
+QWERTY keys makes them infeasible for inserting non-QWERTY Unicode
+characters.
+
+The \textbf{\emph{µ}Letras} lexicon comprises phrases composed of the
+QWERTY marks supplemented by the characters in Figure 19. Inspection of
+the supplemental characters shows them to be largely associable with
+individual QWERTY marks:
+
+\begin{itemize}
+\item
+  The grave-accented vowels consonants (\textbf{á/Á, é/É, í/Í, ó/Ó, ú/Ú,
+  ç/Ç, ñ/Ñ}) are accented versions of QWERTY marks.
+\item
+  The sentence-initial punctuation marks (\textbf{¡¿}) are inverted
+  versions of QWERTY marks (\textbf{!?}).
+\item
+  The \emph{\textbf{guillemet}} (\textbf{« »}) are visually similar to
+  the greater/less than marks (\textbf{\textless{} \textgreater{}}).
+\item
+  The \emph{\textbf{pesata}} sign (\textbf{₧}) starts with a capital P.
+\item
+  The \emph{\textbf{euro}} sign (\textbf{€}) is a currency sign
+  semantically associable to the dollar sign (\textbf{\$}).
+\end{itemize}
+
+The remaining character - diaresis-accented u/U (\textbf{ü/Ü}) - is not
+used in Spanish lexemes but occurs frequently enough in borrow-words to
+merit inclusion in µ\textbf{Letras}. µ\textbf{Letras} associates
+\textbf{v/V} keyboard marks with \textbf{ü/Ü} to distinguish it
+`graphemically' from grave-accented \textbf{ú/Ú} which is associated
+with the unmarked vowel keys \textbf{u/U} like other Spanish vowels
+(Figure 20).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1608}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1566}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1608}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1659}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1608}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1952}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{ñ}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Ç}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} \\
+\midrule
+\endhead
+& & \textbf{Ñ} & \textbf{Ç} & & \\
+\textbf{á} & \textbf{é} & \textbf{í} & \textbf{ó} & \textbf{ú} &
+\textbf{Ü} \\
+\textbf{Á} & \textbf{É} & \textbf{Í} & \textbf{Ó} & \textbf{Ú} &
+\textbf{Ü} \\
+\textbf{¡} & \textbf{¿} & \textbf{«} & \textbf{»} & \textbf{€} & ₧ \\
+\bottomrule
+\end{longtable}
+
+Figure Non-QWERTY Spanish
+Letters, Symbols, and Punctuation
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1665}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1622}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1665}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1718}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1665}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1665}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{n}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{c}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} \\
+\midrule
+\endhead
+& & \textbf{N} & \textbf{C} & & \\
+\textbf{a} & \textbf{E} & \textbf{I} & \textbf{O} & \textbf{U} &
+\textbf{V} \\
+\textbf{A} & \textbf{E} & \textbf{I} & \textbf{O} & \textbf{U} &
+\textbf{V} \\
+\textbf{!} & \textbf{?} & \textbf{\textless{}} & \textbf{\textgreater{}}
+& \textbf{\$} & \textbf{P} \\
+\bottomrule
+\end{longtable}
+
+Figure QWERTY Marks Corresponding
+to Figure 19 Characters
+
+The strategy for solving the problem of accessing
+\textbf{\emph{µ}Letras} is to make them accessible via alternative
+actuations (see section 2.5.1).
+
+Device specific
+
+Display optional
+
+Variety of Alternate Actuations
+
+\section{Alternative Gestures for Common
+Devices}\label{alternative-gestures-for-common-devices}
+
+\section{Keyboard Alternative
+Gestures}\label{keyboard-alternative-gestures}
+
+\section{Mouse Alternative
+Gestures}\label{mouse-alternative-gestures}
+
+\section{Alternative Gestures for Uncommon
+Devices}\label{alternative-gestures-for-uncommon-devices}
+
+\section{Visual Preview and Feedback Associated to
+Gestures}\label{visual-preview-and-feedback-associated-to-gestures}
+
+\section{Simultaneously Presenting Character and Phrase Input
+Choice}\label{simultaneously-presenting-character-and-phrase-input-choice}
+
+e
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+\end{enumerate}
