@@ -1,0 +1,28 @@
+project:
+  type: book
+book:
+  title: Gesture-Efficient Global Language Input Methods
+  subtitle: Drafts for review
+  chapters:
+  - index.qmd
+  - 01-introduction.qmd
+  - 02-background.qmd
+  - 03-case-study-and-representative-application.qmd
+  - 04-algorithm-and-design-concepts.qmd
+  - 05-implementation.qmd
+  - 06-app-typology.qmd
+  - 90-conclusion.qmd
+  - 91-reference.qmd
+  - 92-sample-app-user-manual.qmd
+  - 93-another-appendix-if-needed.qmd
+  - 94-vita.qmd
+format:
+  pdf:
+    documentclass: scrbook
+    toc: true
+    pdf-engine: xelatex
+    fontsize: 12pt
+    mainfont: Times New Roman
+    CJKmainfont: "SimSun"
+    include-in-header:
+    - tex/utc_frontmatter.tex
