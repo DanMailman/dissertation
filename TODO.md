@@ -61,6 +61,7 @@
 
 - [ ] **Triplet style**: Replace paired-backslash glosses `\gloss\` with single-quoted glosses `‘gloss’` (or `'gloss'` if needed), and italicize pinyin in parentheses:
 - [ ] Replace stray LaTeX-like commands in prose (e.g., `\Chinese`) with plain text.
+- [ ] Normalize acronym usage to `\gls{...}` where appropriate.
 
 ## CJK + PDF robustness
 
