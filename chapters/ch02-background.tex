@@ -10,20 +10,19 @@ example, the English lexeme /father-in-law/ has lexons
 (/yuèfù/, /father-in-law/), has lexons {[}~\textbf{岳}, \textbf{父}~{]}.
 
 When using a qwerty keyboard to input English lexemes, the gestural
-efficiency is one \emph{\textbf{\uline{lexon}}} (letter) for one
+efficiency is approximately one \emph{\textbf{\uline{lexon}}} (letter) for one
 \emph{\textbf{\uline{gesture}}} or 100\%.
 
 Specialty \emph{\textbf{\uline{input methods}}}
 (\emph{\textbf{\uline{IME}}}s) enable qwerty keyboards to input
-non-English lexons and lexemes. Figure 1 is an example of a Chinese IME.
+non-English lexons and lexemes. Figure~\ref{fig:chinese-ime} shows an example of a Chinese IME.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=6.5in,height=1.53611in]{media/media/image1.png}
-\caption{Chinese Input Method}
-\label{fig:auto:1}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{media/chinese_input_method.png}
+	\caption{Example Chinese Input Method}
+	\label{fig:chinese-ime}
 \end{figure}
-
 
 In general, non-English IMEs have gestural efficiencies below 100\%. For
 example, The Chinese IME inputs the two lexons with 6-8 qwerty gestures,
@@ -32,24 +31,23 @@ for a \emph{\textbf{\uline{gestural efficiency}}}
 
 Global language IMEs are software that have dynamic displays indicating
 \textbf{\uline{gesture/choice associations}}
-(\emph{\textbf{\uline{GCA}}}s). For example
+(\emph{\textbf{\uline{GCA}}}s). \TODO{example}
 
-(gestures for choices that lead to lexical input. Factors that
-contribute to increased IME usability are:
+Factors that contribute to increased IME usability are:
 
 \begin{itemize}
 \item
-  Gestural Efficiency- Minimize the number of gestures required to
+  Gestural Efficiency -- Minimize the number of gestures required to
   effect lexical input.
 \item
   Touch typing -- Minimize time and mental effort to learn
   gestures+choices GCA without reference to the display.
 \item
-  Visual Scan -Minimize time and visual effort to locate displayed
+  Visual Scan -- Minimize time and visual effort to locate displayed
   gesture+choice
 \end{itemize}
 
-The goal of this research is to produce IMEs which increase efficiency
+The goal of this research is to develop techniques to produce IMEs which increase efficiency
 for global language by reducing the number of gestures needed to input
 lexemes and lexons.
 
@@ -60,7 +58,7 @@ presentation of the research.
 
 \section{Non-QWERTY Lexica}\label{non-qwerty-lexica}
 In linguistics, a collection of words and multi-word set phrases is a
-\emph{\textbf{lexicon}} (pl: \emph{\textbf{lexica}}) (Masini, 2019).
+\emph{\textbf{lexicon}} (pl: \emph{\textbf{lexica}}) \parencite{Masini2019MWEMorphology}.
 Individual items in a \emph{\textbf{\uline{lexicon}}} are
 \emph{\textbf{\uline{lexemes}}}.
 
@@ -68,29 +66,32 @@ This research defines \emph{\textbf{lexica}} as \textbf{\uline{sets}} of
 statistically common lexon sequences for populations of (computer)
 users. So, the English language lexicon contains lexemes /a/, /the/, /in
 front of/, and /father-in-law/. Note that, for this research, lexica are
-for written, not spoken, language. Figure 2 shows examples of lexica are
+for written, not spoken, language. Table~\ref{tab:lexica-user-communities} shows examples of lexica and
 their user communities.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6122}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3878}}@{}}
-\toprule
-\begin{minipage}[b]{\linewidth}\raggedright
-Lexicon
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-User Community
-\end{minipage} \\
-\midrule
-\endhead
-English Phrases & English Speakers \\
-Chinese Phrases & Chinese Speakers \\
-American English Legal Terms & American Lawyers \\
-Emoticons & Texters \\
-\bottomrule
-\end{longtable}
+\begin{table}[H]
+	\centering
+	\caption{Examples of lexica and associated user communities}
+	\label{tab:lexica-user-communities}
 
-Figure Examples of Lexica and
-Associated User Communities
+	{%
+		% Local spacing tweaks (only affect this table)
+		\setlength{\tabcolsep}{3pt}% horizontal padding inside cells (default 6pt)
+		\renewcommand{\arraystretch}{0.85}% vertical spacing between rows (default 1.0)
+
+		\begin{tabular}{|l|l|}
+			\hline
+			\textbf{Lexicon} & \textbf{User Community} \\ \hline
+			English Phrases             & English Speakers \\ \hline
+			Chinese Phrases             & Chinese Speakers \\ \hline
+			American English Legal Terms& American Lawyers \\ \hline
+			Emoticons                   & Texters \\ \hline
+		\end{tabular}
+	}%
+
+\end{table}
+
+
 
 Lexemes are \emph{\textbf{\uline{sequences}}} of the 149,186 characters
 available in the Unicode standard (\emph{Unicode FAQ}, 2023). In
@@ -101,117 +102,186 @@ International Phonetic Alphabet (IPA) and Braille. It also contains
 language specific symbols in \emph{\textbf{scripts}}, such as Arabic,
 Greek, Hebrew, Japanese (Hiragana, Katakana), and Chinese.
 
-\section{Lexons are from the Unicode
-Standard}\label{lexons-are-from-the-unicode-standard}
+\section{Lexons are from the Unicode Standard}\label{lexons-are-from-the-unicode-standard}
 
-Unicode is effectively a superset of all inputtable characters (Allen et
-al., 2012b). Many linguistic input sets are indicated in Figure 3, taken
-from (Allen et al., 2012b). The typologies (Alphabets Abjads, Abugidas,
-Logosyllabaries, Simple Syllabaries, Featural Syllabaries) are useful in
-understanding the relationships between a language's lexemes and its
-lexons.
+Unicode is effectively a superset of all inputtable characters
+\parencite{UnicodeConsortium2025Unicode170}. Many linguistic input sets
+are summarized in Table~\ref{tab:writing-system-types}, adapted from
+\textcite{UnicodeConsortium2025Unicode170}. The typologies (Alphabets,
+Abjads, Abugidas, Logosyllabaries, Simple Syllabaries, and Featural
+Syllabaries) are useful in understanding the relationships between a
+language's lexemes and its lexons.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=2.70427in,height=2.12037in]{media/media/image2.png}
-\caption{Unicode Standard Script Typology}
-\label{fig:auto:2}
-\end{figure}
+\begin{table}[H]
+	\centering
+	\captionsetup{skip=0.5\DocDefaultBaselineSkip}%
+	\caption{Writing-system types and example scripts}
+	\label{tab:writing-system-types}
+	\begingroup
+	% --- Local spacing + font tweaks: ONLY this table ------------------------
+	\setlength{\tabcolsep}{4pt}% BIG horizontal padding (for testing)
+	\renewcommand{\arraystretch}{1.05}% BIG vertical padding (for testing)
 
+	% Make X-columns use m{..} so they are vertically centered
+	\renewcommand{\tabularxcolumn}[1]{m{#1}}
+
+	\begin{spacing}{0.9} % override global double-spacing just for this table
+		\footnotesize        % smaller font so dense content still looks ok
+
+		\begin{tabularx}{\textwidth}{|
+				>{\raggedright\arraybackslash\bfseries}m{0.22\textwidth}|
+				>{\raggedright\arraybackslash}X|
+			}
+			\hline
+			Type & {\bfseries Example scripts} \\ \hline
+
+			Alphabets &
+			Armenian, Avestan, Bassa Vah, Carian, Caucasian Albanian, Coptic,
+			Cyrillic, Deseret, Elbasan, Georgian, Glagolitic, Gothic, Greek,
+			Kayah Li, Latin, Lisu, Lycian, Lydian, Mahajani, Mandaic,
+			Meroitic Cursive, Meroitic Hieroglyphs, Mongolian, Mro, \mbox{N’Ko},
+			Ogham, Old Italic, Old Permic, Old Persian, Old Turkic, Osmanya,
+			Pahawh Hmong, Pau Cin Hau, Runic, Shavian, Thaana, Tifinagh,
+			Ugaritic, Wancho, Warang Citi \\ \hline
+
+			Abjads &
+			Arabic, Hebrew, Imperial Aramaic, Inscriptional Pahlavi,
+			Inscriptional Parthian, Manichaean, Nabataean, Old North Arabian,
+			Old South Arabian, Old Uyghur, Palmyrene, Phoenician, Psalter
+			Pahlavi, Samaritan, Syriac \\ \hline
+
+			Abugidas &
+			Balinese, Batak, Bengali, Brahmi, Buginese, Buhid, Chakma, Cham,
+			Devanagari, Grantha, Gujarati, Gurmukhi, Hanunóo, Javanese,
+			Kaithi, Kannada, Kawi, Khmer, Khojki, Khudawadi, Lao, Lepcha,
+			Limbu, Malayalam, Meetei Mayek, Modi, Myanmar, New Tai Lue, Newa,
+			Oriya, Phags-pa, Rejang, Saurashtra, Sharada, Siddham, Sinhala,
+			Sora Sompeng, Sundanese, Syloti Nagri, Tagalog, Tagbanwa, Tai Le,
+			Tai Tham, Tai Viet, Takri, Tamil, Telugu, Thai, Tibetan, Tirhuta
+			\\ \hline
+
+			Logosyllabaries &
+			Egyptian Hieroglyphs, Han, Linear~A, Sumero-Akkadian \\ \hline
+
+			Simple Syllabaries &
+			Bamum, Bopomofo, Canadian Aboriginal Syllabics, Cherokee, Cypriot,
+			Ethiopic, Hiragana, Katakana, Linear~B, Mende Kikakui, Miao, Vai,
+			Yi \\ \hline
+
+			Featural Syllabaries &
+			Hangul \\ \hline
+
+		\end{tabularx}
+	\end{spacing}
+	\endgroup
+
+\end{table}
 
 \section{Lexical Input Strategies}\label{lexical-input-strategies}
-There are two different strategies for software to give users choices
-leading to lexical input:
+
+There are two main strategies for software to give users choices leading
+to lexical input:
 
 \begin{itemize}
-\item
-  Character selection: Users choose individual characters comprising
-  lexical items one at a time. An example is keyboarding English.
-\item
-  Sequenced selection: Users make choices from a display associating
-  gestures on peripherals with lexemes. Examples are methods used in
-  mobile phone texting apps to select lexemes instead of letters. More
-  complex examples present sequences in which individual selections
-  cause subsequent choices to be presented; so, a sequence of selections
-  lead to input lexical items.
+	\item \textbf{Character selection.} Users choose individual
+	characters (lexons) one at a time to compose lexemes.
+	Keyboarding English with a QWERTY layout is a common example.
+
+	\item \textbf{Sequenced selection.} Users make choices from a display
+	that associates gestures on peripherals with lexemes rather than
+	individual characters. Mobile phone texting apps that offer
+	word-level suggestions instead of letter-by-letter input are
+	familiar examples. More complex sequenced-selection methods
+	present a series of displays in which each selection changes the
+	next set of available choices, so that a sequence of selections
+	leads to a lexical item being input.
 \end{itemize}
 
-Although symbol selection systems use more gestures (e.g., keystrokes)
-for input, they have the advantage of being able to select any lexical
-item by its comprising symbols. Sequenced selection input systems, on
-the other hand, reduce gesture counts for many lexemes; but, given the
-productive nature of language, cannot encompass entire lexica.
+Character-selection systems may require more gestures (for example,
+keystrokes) to input a lexeme, but they have the advantage that any
+lexeme can be assembled from its comprising characters. Sequenced
+selection systems, on the other hand, can reduce the number of gestures
+needed for many lexemes; but, given the productive nature of language,
+they cannot practically encompass entire lexica.
 
-Given the certainty that sequenced selection systems will not include
-all lexemes, they must be supplemented with symbol selection systems.
-So, \textbf{\emph{µ}Lex} apps are either character selection systems or
-combined character \textbf{+} sequence selection systems.
+Given that sequenced selection systems will not include all lexemes,
+they must be supplemented with character-selection systems. In practice,
+\mulex{} apps therefore operate either as pure character-selection
+systems or as combined character \textbf{+} sequence-selection systems.
 
 \section{Lexical Input Peripheral
-Devices}\label{lexical-input-peripheral-devices}
+	Devices}\label{lexical-input-peripheral-devices}
 
-\emph{\textbf{µLex}} is device-agnostic; it can be used with common
-input peripherals keyboards, mice, touchscreens, etc. as well as with
+\mulex{} is device-agnostic; it can be used with common input
+peripherals such as keyboards, mice, and touchscreens as well as with
 less-common input peripherals, the number and variety of which is
-increasing over time (Rosenberg, 1998). Enumerating and describing the
-wide variety of specialized, novel, and experimental input devices is
-outside the scope of this research; so a single class of peripherals --
-\emph{\textbf{chordsets}} (chordal handsets) (Noyes, 1983; Rosenberg \&
-Slater, 1999; Rude, 2019; Seibel, 1962; Tarniceriu et al., 2013; Wu et
-al., 2007) -- will be described here. Later sections will describe their
-use with \emph{\textbf{µLex}}.
+increasing over time \parencite{Rosenberg1998ComputingWithoutMice}.
+Enumerating and describing the full range of specialized, novel, and
+experimental input devices is outside the scope of this research.
+Instead, a single class of peripherals---\emph{\textbf{chordsets}}
+(chordal handsets)---is used as a representative hardware platform
+\parencite{Noyes1983ChordKeyboards,Seibel1962FiveFingerChordKeyboard,
+	Rosenberg1999ChordingGlove,Rude2019QwertyChordKeyboard,
+	Tarniceriu2013FeedbackChordTyping,Wu2007ChordInputImprovements}.
+Later sections will describe how chordsets are used with \mulex{}.
 
 \section{Keyboards}\label{keyboards}
-For the development of the \emph{\textbf{µLex}} software, the keyboard's
-salient feature is the \emph{\textbf{marks}} on every key which, taken
-together, comprise an \emph{\textbf{input set}}. Most keyboard marks
-indicate characters to be input. However, the keyboard is often used for
-other purposes than mark input; so, the semantics of the marks may be
-redefined by the software being used.
 
-For instance, the standard Microsoft Windows Chinese \emph{\textbf{input
-method}} (\emph{\textbf{IME}}) (Zheng et al., 2011) presents characters
-that can be selected via numeric key or mouse click (). For this IME,
-the semantics of the marks are positions on the \emph{\textbf{graphical
-user interface}} (\emph{\textbf{GUI}}).
+For the development of the \mulex{} software, the keyboard's salient
+feature is the \emph{\textbf{marks}} on its keys which, taken together,
+comprise an \emph{\textbf{input set}}. Most keyboard marks indicate
+characters to be input. However, the keyboard is often used for other
+purposes than direct character input; the semantics of the marks may be
+redefined by the currently active software.
+
+For instance, the standard Microsoft Windows Chinese
+\emph{\textbf{input method}} (\emph{\textbf{IME}})
+\parencite{Zheng2011WhyPressBackspace} presents candidate characters
+that can be selected via numeric key or mouse click. In this IME, the
+semantics of the numeric key marks are positions on the
+\emph{\textbf{graphical user interface}} (\emph{\textbf{GUI}}) rather
+than the literal digits themselves.
 
 \section{Mice}\label{mice}
-The salient feature for mice (and several other peripherals, such as
-touch screens) is that they move the cursor to select positions on
-software defined GUIs. Once a mouse is positioned on a GUI, there are
-several possible completions to mouse gestures; different mouse buttons
-can be actuated in any of several ways (single click, double click,
-etc.). Software is responsible for associating mouse actuations with
-(not necessarily lexical) input. For example, many software GUIs use
-mouse-actuation selection on menus to allow users to select software
-functionalities ().
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=3.7963in,height=1.63208in]{media/media/image3.jpeg}
-\caption{GUI Menus Allow Mouse Positional Selection of Software Functionality}
-\label{fig:auto:3}
+The salient feature for mice (and several other peripherals, such as
+touchscreens) is that they move a cursor to select positions on a
+software-defined GUI. Once a mouse is positioned on a GUI element, there
+are several possible completions to the gesture: different mouse buttons
+can be actuated, and each can be actuated in several ways (single click,
+double click, press-and-hold, and so on). Software is responsible for
+associating these mouse actuations with actions, which may or may not
+produce lexical input. For example, many GUIs use mouse-based selection
+on menus to allow users to choose software functionalities rather than
+enter characters, as illustrated in Figure~\ref{fig:gui-menus-mouse-pos-selection}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{media/gui_menus_mouse_pos_selection.jpg}
+	\caption{Example GUI menu selection using a mouse-controlled cursor}
+	\label{fig:gui-menus-mouse-pos-selection}
 \end{figure}
 
 
-\section{Chordal Input
-Peripherals}\label{chordal-input-peripherals}
+\section{Chordal Input Peripherals}\label{chordal-input-peripherals}
 
-Chordsets are peripherals enabling user input commands by actuating
-several keys simultaneously (analogous to a piano "chord"). The number
-of items selectable for a given number of actuators is the number of
-combinations of the individual actuators. For example, there are several
-one-hand chordsets (e.g., Figure 5). Given 1 actuator for each finger,
-the number of possible selections is 31 - a large enough number to make
-simple English text input possible (Seibel, 1962). Chordsets are
-sometimes used in contexts (e.g., bicycle handlebars) too small for
-standard keyboard.
+Chordsets are input peripherals that enable user commands by actuating
+several keys simultaneously, analogous to playing a chord on a piano.
+The number of distinct selectable items for a given chordset is the
+number of non-empty combinations of its individual actuators. For
+example, there are several one-hand chordsets
+(see Figure~\ref{fig:hand-chordal-handset}). With one actuator for each
+finger (five actuators), there are $2^5 - 1 = 31$ possible non-empty
+chords, a large enough set to make simple English text input feasible
+\parencite{Seibel1962FiveFingerChordKeyboard}. Chordsets are sometimes
+used in contexts that are too small or constrained for a standard
+keyboard, such as underwater survey sleds or bicycle handlebars.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1.16667in,height=1.52621in]{media/media/image4.emf}
-\caption{One-handed Chordset}
-\label{fig:auto:4}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.25\textwidth]{media/hand_and_chordal_handset.png}
+	\caption{Hand positioned on a one-hand chordal handset}
+	\label{fig:hand-chordal-handset}
 \end{figure}
 
 
@@ -223,25 +293,32 @@ software with a distinct software functionality. Examples follow in
 future sections.
 
 \section{Device Agnosticism}\label{device-agnosticism}
-It is not uncommon for software to allow GUI features designed for one
-device to be optionally selected by another device. illustrates a GUI
-intended for keyboard selection via number keys allowing positional
-selection via mouse click. Another common example is that many software
-apps provide \emph{\textbf{keyboard accelerators}} () to associate the
-key marks with menu items (Hendy, 2009; Pausch et al., 1991).
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=4.83401in,height=2.09404in]{media/media/image5.png}
-\caption{Keyboard Accelerators Associate App Commands with Gesture Sequences}
-\label{fig:auto:5}
+It is not uncommon for software to allow GUI features designed for one
+input device to be optionally selected by another. For example, a GUI
+intended for keyboard selection via number keys may also allow the same
+choices to be selected via mouse clicks. Another common example is that
+many software applications provide \emph{\textbf{keyboard accelerators}}
+to associate key marks with menu items, so that the same functionality
+can be invoked either by mouse or by keyboard
+\parencite{Hendy2009GUIAccelerators,Pausch1991VoiceVsAccelerators}.
+
+Figure~\ref{fig:keyboard-accelerators} illustrates a GUI menu in which
+menu items can be selected either by mouse position or by keyboard
+accelerators.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.50\textwidth]{media/keyboard_accelerators.png}
+	\caption{Example GUI menu showing keyboard accelerators associated with menu items}
+	\label{fig:keyboard-accelerators}
 \end{figure}
 
+\mulex{} is designed to be \emph{\textbf{device agnostic}}:
+\mulex{} GUIs present choices that can be selected by any peripheral
+with the ability to send key-mark, positional, or discrete numeric
+information via the operating system.
 
-\emph{\textbf{µLex}} is designed to be \emph{\textbf{device agnostic}} -
-\emph{\textbf{µLex}} GUIs present choices that can be selected by any
-peripheral with the ability to send key mark, positional, or discrete
-numeric information via the OS.
 
 \section{Input Gestures}\label{input-gestures}
 It is useful to view the input process in terms of user gestures. As a
@@ -269,215 +346,253 @@ For the purposes of this research:
   actuators.
 \end{itemize}
 
-\section{Alternative Actuations}\label{alternative-actuations}
+\subsection{Alternative Actuations}\label{subsec:alternative-actuations}
+
 Individual marked keys and GUI positional regions can be associated with
 several alternative actuations to increase available software
-functionalities. Figure 7 illustrates example alternative keyboard
-actuations for the `\textbf{B}` key.
+functionalities. Table~\ref{tab:alt-keyboard-actuations} illustrates
+example alternative keyboard actuations for the \texttt{B} key.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3956}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6044}}@{}}
-\toprule
-\begin{minipage}[b]{\linewidth}\raggedright
-Alternative Actuation
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Software Functionality
-\end{minipage} \\
-\midrule
-\endhead
-B & Insert Lowercase B \\
-\textless Shift\textgreater B & Insert Uppercase B \\
-\textless Ctrl\textgreater B & Change Selection To/From Boldface \\
-\bottomrule
-\end{longtable}
+\begin{table}[H]
+	\centering
+	\caption{Alternative keyboard actuations and associated software functionalities}
+	\label{tab:alt-keyboard-actuations}
+	\begingroup
+	\setlength{\tabcolsep}{4pt}%
+	\renewcommand{\arraystretch}{0.9}%
+	\begin{singlespace*}
+		\small
 
-Figure Alternative Keyboard
-Actuations and Associated Software Functionalities
+		\begin{tabular}{|l|l|}
+			\hline
+			\textbf{Alternative Actuation} & \textbf{Software Functionality} \\ \hline
+			\texttt{B}                     & Insert lowercase \texttt{b} \\ \hline
+			\texttt{\textless Shift\textgreater B} & Insert uppercase \texttt{B} \\ \hline
+			\texttt{\textless Ctrl\textgreater B}  & Change selection to/from boldface \\ \hline
+		\end{tabular}
 
-Once positioned, there are several mouse actuations that software may
-associate several different actuations with software functionalities.
-Figure 8 enumerates example alternative mouse actuated software
-functionalities.
+	\end{singlespace*}
+	\endgroup
+\end{table}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4616}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5384}}@{}}
-\toprule
-\begin{minipage}[b]{\linewidth}\raggedright
-Alternative Actuation
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Software Functionality
-\end{minipage} \\
-\midrule
-\endhead
-Single Left Click & Move Cursor for Insertion \\
-Double Left Click & Select Enclosing Word \\
-Triple Left Click & Select Enclosing Paragraph \\
-Right Click & Context Menu (Figure 9) \\
-\bottomrule
-\end{longtable}
+Once a cursor has been positioned on a GUI element, there are several
+mouse actuations that software may associate with different
+functionalities. Table~\ref{tab:alt-mouse-actuations} enumerates example
+alternative mouse-actuated software functionalities.
 
-Figure Alternative Mouse
-Actuations and Associated Software Functionalities
+\begin{table}[H]
+	\centering
+	\caption{Alternative mouse actuations and associated software functionalities}
+	\label{tab:alt-mouse-actuations}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1.0566in,height=1.7102in]{media/media/image6.png}
-\caption{Context Menus are Often Displayed as a Result of Clicking Right Mouse Buttons}
-\label{fig:auto:6}
-\end{figure}
+	\begingroup
+	\setlength{\tabcolsep}{4pt}%
+	\renewcommand{\arraystretch}{0.9}%
+	\begin{singlespace*}
+		\small
+
+		\begin{tabular}{|l|l|}
+			\hline
+			\textbf{Alternative Actuation} & \textbf{Software Functionality} \\ \hline
+			Single left click  & Move cursor for insertion \\ \hline
+			Double left click  & Select enclosing word \\ \hline
+			Triple left click  & Select enclosing paragraph \\ \hline
+			Right click        & Open context menu \\ \hline
+		\end{tabular}
+
+	\end{singlespace*}
+	\endgroup
+\end{table}
 
 
-\section{Input Gestures are not Input
-Effort}\label{input-gestures-are-not-input-effort}
+\section{Input Gestures Are Not Input
+	Effort}\label{input-gestures-are-not-input-effort}
 
 Gestures and alternative actuations vary in user \emph{\textbf{effort}}:
 
 \begin{itemize}
-\item
-  Typing `\textbf{1}` requires more effort than `\textbf{a}`.
-\item
-  Triple click requires more effort than single click.
-\item
-  Shifting adds effort when capitalizing.
-\item
-  Three finger chords require more effort than single finger chords.
+	\item Typing \texttt{1} typically requires more effort than typing
+	\texttt{a}.
+	\item A triple click requires more effort than a single click.
+	\item Holding \texttt{Shift} adds effort when capitalizing.
+	\item Three-finger chords require more effort than single-finger
+	chords.
 \end{itemize}
 
-A related set of studies focus on user \emph{\textbf{effort}} for
-lexical input. For instance, there are several studies that use
-annealing algorithms to discover alternative more
-\emph{\textbf{effort-efficient}} keyboard layouts (Francis \& Oxtoby,
-2006; Light \& Anderson, 1993; Onsorodi \& Korhan, 2020).
+Tables~\ref{tab:alt-keyboard-actuations} and
+\ref{tab:alt-mouse-actuations} give simple examples of such alternative
+actuations for keyboards and mice.
 
-Effort considerations are ignored for the current research, which
-attempts to provide a more general measure of \emph{\textbf{gesture}} to
-be applied device-agnostically.
+A related line of work focuses explicitly on user effort for lexical
+input. Several studies use simulated annealing or genetic algorithms to
+discover more \emph{\textbf{effort-efficient}} keyboard layouts
+\parencite{Francis2006OptimizedKeyboards,
+	Light1993SimulatedAnnealingKeyboards,
+	Onsorodi2020GeneticAlgorithmKeyboardLayout}.
 
-Specifically, for this research, each alternative actuation, even if it
-involves additional keys, clicks, time, or effort is quantified as a
-single gesture.
+Effort considerations are deliberately ignored in the current research,
+which instead attempts to provide a more general measure of
+\emph{\textbf{gesture}} that can be applied device-agnostically.
+Specifically, for this research, each alternative actuation—regardless
+of how many keys, clicks, or how much time or physical effort it
+requires—is quantified as a single gesture.
 
 \section{Gesture/Functionality
-Associations}\label{gesturefunctionality-associations}
+	Associations}\label{gesturefunctionality-associations}
 
-All GUIs present users with associations of device gestures with
-software functionalities. For keyboards, \emph{\textbf{gesture/function
-associations}} (\emph{\textbf{GFAs}}) make use of the choices presented
-by the \textbf{\uline{marks}} on the individual keys. The marks are used
-for character input and - when combined with special keys
-\textbf{(\textless ctrl\textgreater{}},
-\textbf{\textless alt\textgreater{}},
-\textbf{\textless esc\textgreater{}},
-\textbf{\textless shift\textgreater{}}) - invoke other functions such as
-keyboard accelerators (section 2.5.1, Figure 6).
+All GUIs present users with associations between device gestures and
+software functionalities. For keyboards, these
+\emph{\textbf{gesture/function associations}} (\emph{\textbf{GFAs}})
+make use of the choices presented by the \textbf{\uline{marks}} on the
+individual keys. The marks are used for character input and, when
+combined with modifier keys such as
+\texttt{\textless Ctrl\textgreater},
+\texttt{\textless Alt\textgreater},
+\texttt{\textless Esc\textgreater}, and
+\texttt{\textless Shift\textgreater}, they invoke other functions such
+as keyboard accelerators (see
+Section~\ref{subsec:alternative-actuations} and
+Figure~\ref{fig:keyboard-accelerators}).
 
-For mice, touchscreens and other cursor moving devices, GFAs are
-positional on the GUI itself (e.g., menus, Figure 8). Many GUIs do
-\textbf{\uline{not}} use mice for lexical input. Instead,
-\uline{supplemental} software (e.g., virtual keyboards) are used to
-provide mouse-click/QWERTY-input GFAs.
+For mice, touchscreens, and other cursor-moving devices, GFAs are
+positional on the GUI itself (for example, menus as in
+Figure~\ref{fig:keyboard-accelerators}). Many GUIs do
+\textbf{\uline{not}} use mice directly for lexical input. Instead,
+\textbf{\uline{supplemental}} software such as virtual keyboards
+provides mouse-click/QWERTY-input GFAs, as illustrated in
+Figure~\ref{fig:virtual-keyboard}.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=2.78075in,height=1.61111in]{media/media/image7.png}
-\caption{Virtual Keyboard for QWERTY Characters}
-\label{fig:auto:7}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.25\textwidth]{media/virtual_keyboard.png}
+	\caption{Virtual keyboard providing QWERTY character gesture/functionality associations}
+	\label{fig:virtual-keyboard}
 \end{figure}
-
 
 For chordsets and other non-marked, non-cursor-positioning devices, GFAs
-are provided by supplemental displays (Figure 11), often available only
-as images or paper documents.
+are provided by supplemental displays, often available only as images or
+paper documents. Figure~\ref{fig:bat-chord-display} shows an example
+display for the BAT chordal keyboard, pairing a printed chord/letter map
+with the physical device.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=2.87037in,height=1.42881in]{media/media/image8.png}
-\caption{\includegraphics[width=1.43063in,height=1.46296in]{media/media/image9.jpeg}}
-\label{fig:auto:8}
+\begin{figure}[H]
+	\centering
+	% Outer container, centered, narrower than full text width
+	\begin{minipage}{0.8\textwidth}
+		\centering
+
+		% Left image: chord map
+		\begin{minipage}[b]{0.60\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{media/bat_chord_map.png}
+		\end{minipage}%
+		\hspace{1em}% small fixed gap
+		% Right image: device photo
+		\begin{minipage}[b]{0.28\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{media/bat_device.jpg}
+		\end{minipage}
+
+	\end{minipage}
+	\caption{BAT chordal keyboard GFAs and hardware}
+	\label{fig:bat-chord-display}
 \end{figure}
 
 
-Figure Display for BAT Keyboard
-Chord/Letter GFAs
 
 \section{Gestural Efficiency}\label{gestural-efficiency}
-By analogy with the definition of \emph{\textbf{efficiency}} from
-physics, the basis for analysis of software developed in this research
-is \emph{\textbf{Gestural~Efficiency}}~(\emph{\textbf{GE}}):
 
-\[Gestural\ Efficiency\ (GE) = \ \frac{Characters}{Gestures}\]
-
-Where: \emph{\textbf{Gestures}} is the number of distinct user movements
-and \emph{\textbf{Characters}} is the number of Unicode characters
-input. So, the GE for keyboarding, virtual keyboard clicking, or
-chording `\textbf{\uline{cat}}` is:
-
-\[{GE}_{\left\lbrack \text{`cat`} \right\rbrack} = \frac{3\ Characters}{3\ Gestures} = 1\]
-
-The GE for keyboard, virtual keyboard, and basic chordset input of
-lexemes is effectively 1 \emph{\textbf{character per gesture}}
-(\emph{\textbf{CPG}}):
-
-\[{GE}_{\lbrack Eng,Kbd\rbrack} = \ \frac{1\ Character}{1\ Gesture} = 1\]
-
+By analogy with the definition of \emph{\textbf{efficiency}} in physics,
+the basis for analysis of the software developed in this research is
+\emph{\textbf{Gestural Efficiency}} (\emph{\textbf{GE}}):
+\[
+\textit{Gestural Efficiency (GE)} = \frac{\textit{Characters}}{\textit{Gestures}}
+\]
+Here, \emph{\textbf{Gestures}} is the number of distinct user
+movements and \emph{\textbf{Characters}} is the number of Unicode
+characters input. For example, the GE for keyboarding, virtual keyboard
+clicking, or chording the English lexeme \textit{cat} is
+\[
+GE_{[\text{cat}]} = \frac{3\ \text{characters}}{3\ \text{gestures}} = 1.
+\]
+The GE for basic QWERTY keyboard input of English lexemes is thus
+effectively one \emph{\textbf{character per gesture}} (\emph{\textbf{CPG}}):
+\[
+GE_{[\text{Eng},\text{Kbd}]} = \frac{1\ \text{character}}{1\ \text{gesture}} = 1.
+\]
 Even for single characters, GE is not always 1. For example, one way of
-inputting \emph{\textbf{ñ}} with the windows OS is to keyboard the
-6‑gesture sequence:
+inputting \emph{\textbf{ñ}} in Microsoft Windows is to keyboard the
+six-gesture sequence shown in
+Figure~\ref{fig:six-gesture-sequence-n-tilde}.
 
-\textbf{\textless Fn\textgreater+\textless NmLk\textgreater{}}\\
-\textbf{\textless Alt\textgreater+\textless Num 1\textgreater{}}\\
-\textbf{\textless Alt\textgreater+\textless Num 6\textgreater{}}\\
-\textbf{\textless Alt\textgreater+\textless Num 4\textgreater{}}\\
-\textbf{\textless Fn\textgreater+\textless NmLk\textgreater{}}
+\begin{figure}[H]
+	\centering
 
-Figure 6-Gesture Sequence to
-Input \textbf{ñ} on Microsoft Windows
+	\begin{singlespace*} % single-space just the gesture lines
+		\ttfamily
+		\begin{tabular}{l}
+			\textless Fn\textgreater{}+\textless NumLk\textgreater{} \\
+			\textless Alt\textgreater{}+\textless Num 1\textgreater{} \\
+			\textless Alt\textgreater{}+\textless Num 6\textgreater{} \\
+			\textless Alt\textgreater{}+\textless Num 4\textgreater{} \\
+			\textless Fn\textgreater{}+\textless NumLk\textgreater{}
+		\end{tabular}
+	\end{singlespace*}
 
-GE for \emph{\textbf{ñ}} using this input method is:
+	\caption{Six-gesture sequence to input \textbf{ñ} on Microsoft Windows}
+	\label{fig:six-gesture-sequence-n-tilde}
+\end{figure}
 
-\[{GE}_{\left\lbrack ñ\mathbf{,}kbd \right\rbrack} = \ \frac{1\ Character}{6\ Gestures} = 0.17\]
 
-For some far eastern languages, as Chinese, where users commonly
-keyboard 5-12 keyboard gestures to select individual characters
-(漢字/\textbf{汉字}, ``hànzì''), such as
+The GE for \emph{\textbf{ñ}} using this input method is
+\[
+GE_{[\tilde{n},\text{Kbd}]} =
+\frac{1\ \text{character}}{6\ \text{gestures}} \approx 0.17.
+\]
+For some Far Eastern languages, such as Chinese, users commonly
+keyboard 5–12 gestures to select individual characters
+(漢字/汉字, “hànzì”), such as those shown in
+Table~\ref{tab:sample-simplified-chars}.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3144}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3353}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3503}}@{}}
-\toprule
-\begin{minipage}[b]{\linewidth}\raggedright
-\textbf{升} (shēng, ``liter'')
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\textbf{吊} (diào, ``lift up'')
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\textbf{闯} (chuăng, ``to rush'')
-\end{minipage} \\
-\midrule
-\endhead
-\textbf{迥} (jiǒng, ``distant'') & \textbf{的} (de,
-\textbackslash possessive\textbackslash) & \textbf{一} (yī, ``one'') \\
-\textbf{是} (shì, ``is'') & \textbf{不} (bù, ``not'') & \textbf{了} (le,
-\textbackslash perfective\textbackslash) \\
-\bottomrule
-\end{longtable}
+\begin{table}[H]
+	\centering
+	\caption{Sample simplified Chinese characters}
+	\label{tab:sample-simplified-chars}
 
-Figure Sample Simplified Chinese
-Characters
+	\begingroup
+	% Local spacing tweaks: ONLY this table
+	\setlength{\tabcolsep}{1em}% horizontal space between columns
+	\renewcommand{\arraystretch}{0.85}% slightly tight vertical spacing
 
-The GE for these \textbf{汉字} is:
+	\begin{singlespace*}% override document double-spacing inside table
+		\small               % slightly smaller font for dense content
 
-\[\frac{1\ Character}{12\ Gestures} \leq {GE}_{\lbrack 汉字,kbd\rbrack} \leq \ \frac{1\ Character}{5\ Gestures}\]
+		\begin{tabular}{lll}
+			\textbf{升} (shēng, “liter”)     &
+			\textbf{吊} (diào, “lift up”)   &
+			\textbf{闯} (chuǎng, “to rush”) \\
+			\textbf{迥} (jiǒng, “distant”)  &
+			\textbf{的} (de, “possessive”)  &
+			\textbf{一} (yī, “one”)         \\
+			\textbf{是} (shì, “is”)         &
+			\textbf{不} (bù, “not”)         &
+			\textbf{了} (le, “perfective”)
+		\end{tabular}
 
-Or
+	\end{singlespace*}
+	\endgroup
+\end{table}
 
-\[0.08 \leq {GE}_{\lbrack 汉字,kbd\rbrack} \leq \ 0.20\]
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\item
-  
-\end{enumerate}
+The GE for these \textbf{汉字} is approximately
+\glsadd{sym:leq}
+\[
+\frac{1\ \text{character}}{12\ \text{gestures}}
+\;\leq\;
+GE_{[\text{汉字},\text{Kbd}]}
+\;\leq\;
+\frac{1\ \text{character}}{5\ \text{gestures}}
+\]
+or, numerically,
+\[
+0.08 \;\leq\; GE_{[\text{汉字},\text{Kbd}]} \;\leq\; 0.20.
+\]

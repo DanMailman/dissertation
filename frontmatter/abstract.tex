@@ -1,55 +1,50 @@
 % ============================================================================
-% tex/frontmatter_content/abstract.tex
-%
-% Content-only file used by \AbstractPage{...} in main.tex.
-%
-% House rule:
-%   - Do NOT add \chapter/\section here.
-%   - Do NOT include \begin{document}.
-%   - Keep this file as pure content that can be injected into a macro argument.
+% abstract.tex
 % ============================================================================
 
-	One of the main tasks for computer hardware and software is \textbf{lexical input} -- sending
-	\underline{elements} of human language \underline{input sets} to computer applications like word processors,
-	spreadsheets, etc. Input \underline{elements} include characters (letters, numbers, symbols, etc.) and
-	(possibly single-word) phrases comprised of characters. \underline{Input sets} include languages like
-	English or Chinese and specialized input sets like the International Phonetic Alphabet (IPA).
+A main task of computer hardware and software is \textbf{lexical input}---sending
+\underline{elements} of human language \underline{input sets} to applications such as word processors
+and spreadsheets. Input \underline{elements} include characters (letters, numbers, symbols, etc.) and
+(possibly single-word) phrases comprised of characters. \underline{Input sets} include languages such as
+English or Chinese and specialized input sets like the \gls{ipa}.
 
-	The standard QWERTY keyboard may not best serve as lexical input system in a variety of situations:
+The standard QWERTY keyboard may not best serve as a lexical input system in a variety of situations:
 
-	\begin{itemize}
-		\item It may be absent, as for tablet computers.
-		\item It may be physically difficult to use, as for rheumatoid arthritis sufferers.
-		\item Its fixed markings may not suit input sets, as for several Far Eastern languages.
-	\end{itemize}
+\begin{itemize}
+	\item It may be absent, as for tablet computers.
+	\item It may be physically difficult to use, as for rheumatoid arthritis sufferers.
+	\item Its fixed markings may not suit particular input sets, as for several Far Eastern languages.
+\end{itemize}
 
-	This research describes a device-agnostic, alternative input system (µLex™) that may better serve in these
-	situations alongside, or in place of, keyboards:
+This research describes a device-agnostic, alternative input system (\mulexTM) that may better serve in these
+situations alongside, or in place of, keyboards:
 
-	\begin{itemize}
-		\item Keyboard absence and the limitations inherent in fixed markings are countered by a display-resident,
-		variable-contents presentation/selection grid.
-		\item Physical difficulties, inherent in mouse-clicking as well as keyboarding, is countered by alternative
-		actuation methods.
-		\item Cursor-based slower operation, inherent in on-display input systems, is countered by presenting
-		user-friendly, shorter selection sequences that result in longer length input.
-	\end{itemize}
+\begin{itemize}
+	\item Keyboard absence and the limitations inherent in fixed markings are countered by a display-resident,
+	variable-contents presentation/selection grid.
+	\item Physical difficulties, inherent in mouse-clicking as well as keyboarding, are countered by alternative
+	actuation methods.
+	\item Slower cursor-based operation, inherent in on-display input systems, is countered by presenting
+	user-friendly, shorter selection sequences that result in longer-length input.
+\end{itemize}
 
-	Design concepts and sample apps based on the design concepts are described to illustrate how they are combined
-	to increase efficiency for representative, increasingly complex input sets (Spanish letters and punctuation
-	marks, Pan-Euro Characters, IPA, Chinese).
+Design concepts and sample applications based on those concepts are described to illustrate how they are combined
+to increase efficiency for representative, increasingly complex input sets (Spanish letters and punctuation
+marks, Pan-Euro characters, \gls{ipa}, Chinese).
 
-	The thesis for this research is that gesture efficient input methods for global languages can be generated
-	algorithmically from phrase and character frequency lists. The (language-independent) measure for efficiency
-	is Gestures per Lexeme (lexeme $\sim$ word or phrase) and proof is by construction of the algorithm.
+The thesis of this research is that gesture-efficient \glspl{ime} for global
+languages can be generated algorithmically from phrase- and character-frequency
+lists. Efficiency is measured in \gls{gpl}, where the denominator \gls{lexeme}
+is the basic unit of lexical input (approximately a word or common set phrase in
+a language). Proof is by construction of the algorithm.
 
-	It is shown that the apps are efficient; that is, they optimize the number of input characters for the number
-	of user gestures.
+It is shown that the applications are efficient; that is, they optimize the number of input characters for the number
+of user gestures.
 
-	Further it is shown that the efficiency measures hold regardless of the peripheral devices (e.g., keyboards,
-	mice, touchscreens, etc.) used for input.
+Further, it is shown that these efficiency measures hold regardless of the peripheral devices (e.g., keyboards,
+mice, touchscreens, etc.) used for input.
 
-	The benefits of increasing efficiency are discussed with respect to assistive technologies, non-English input,
-	and novel, special-purpose peripherals.
+The benefits of increasing efficiency are discussed with respect to assistive technologies, non-English input,
+and novel, special-purpose peripherals.
 
-	An app typology is proposed to assist in determining how to design apps for new input sets.
+An application typology is proposed to assist in determining how to design applications for new input sets.
