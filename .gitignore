@@ -23,6 +23,10 @@ _DISCARDS/
 *.fdb_latexmk
 *.fls
 *.md
+!TODO.md
 *.txt
+*.vsdx
+*.xlsx
+*.xlsb
 graduate-manuscript-standards-nov-2024final.pdf
 bodega.tex
