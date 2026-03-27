@@ -7,13 +7,13 @@ accented Latin letters, non-Latin letters, and Chinese words and
 phrases, all of which are represented in the Unicode (Allen et al.,
 2012a) character set.
 
-This software developed in this research, \emph{\textbf{µLex}},
-facilitates non-QWERTY input. \emph{\textbf{µLex}} is designed to
+This software developed in this research, \mulex,
+facilitates non-QWERTY input. \mulex is designed to
 optimize the number of Unicode characters sent to computer apps (e.g.,
 word processors) for the number of user gestures on keyboards, mice, and
 specialized input peripherals.
 
-A unique feature of \emph{\textbf{µLex}} is its flexibility. It can be
+A unique feature of \mulex is its flexibility. It can be
 used for input sets as simple as ``Spanish Letters'' and as complex as
 ``Chinese Phrases''.
 
@@ -22,11 +22,11 @@ lexical input, defines gesture as it applies to peripherals, and posits
 gestural efficiency as a measure for input systems.
 
 Chapter 3 presents an in-depth case-study and description of a
-\emph{\textbf{µLex}} application for the input of Chinese characters,
+\mulex application for the input of Chinese characters,
 words, and phrases.
 
 Chapter 3 uses the Chinese input case study and application description
-to discuss \emph{\textbf{µLex}} design concepts including associating
+to discuss \mulex design concepts including associating
 semantics with alternative actuations, associating visual feedback with
 actuations, and arranging sequenced choice sets for optimizing gestural
 efficiency.
@@ -37,233 +37,3 @@ concepts.
 Chapter 5 discusses an app typology for lexical input apps and
 associating it with characteristics of lexica.
 
-
-\section{Section Formatting Smoke Test}
-\subsection{Subsection Formatting Smoke Test}
-\subsubsection{SubSubSection Formatting Smoke Test}
-\section{Front-matter smoke test}
-\label{sec:fm-smoke}
-
-This short section exists only to populate the TOC/LOF/LOT/LOA/LOS during setup.
-
-% -----------------------------------------------------------------------------
-% FIGURE SMOKE TESTS (main matter)
-% Purpose:
-%   - Verify figure content is centered
-%   - Verify caption is LEFT aligned with a HANGING indent
-%   - Verify single-line caption formatting:  "Figure I.1 Title"
-%   - Verify multi-line caption wrapping + hanging indent
-%   - Verify the UTC-required one single-spaced blank line between figure and caption
-% -----------------------------------------------------------------------------
-
-\section{Figure smoke tests}
-\label{sec:fig-smoke}
-
-This paragraph references Figure~\ref{fig:smoke-single} and Figure~\ref{fig:smoke-wrap}
-to confirm numbering, cross-references, and List of Figures entries.
-
-\begin{figure}[!htbp]
-	\centering
-	\fbox{\rule{0pt}{1.5in}\rule{2.5in}{0pt}}
-	\caption{Smoke-test figure single-line caption}
-	\label{fig:smoke-single}
-\end{figure}
-
-\begin{figure}[!htbp]
-	\centering
-	\fbox{\rule{0pt}{1.5in}\rule{2.5in}{0pt}}
-	\caption{Smoke-test figure caption that is deliberately long so it wraps onto a
-		second line, allowing us to verify left alignment and the hanging indent for
-		continuation lines.}
-	\label{fig:smoke-wrap}
-\end{figure}
-
-This paragraph forces a page break so the next figure can float near the top of
-a page to check top-margin behavior.
-
-\clearpage
-
-\begin{figure}[!t]
-	\centering
-	\fbox{\rule{0pt}{2.0in}\rule{4.0in}{0pt}}
-	\caption{Smoke-test figure at top of page}
-	\label{fig:smoke-top}
-\end{figure}
-
-\clearpage
-
-\section{Table smoke tests}
-\label{sec:tbl-smoke}
-
-This paragraph mentions Table~\ref{tab:after-paragraph}. The table must not appear
-inside this paragraph; it must appear *after* the paragraph.
-
-\vspace{\baselineskip} % UTC: double-space (blank line) before title+table (when not after a subheading)
-
-\begin{table}[!htbp]
-	\caption{Smoke-test table after a paragraph}
-	\label{tab:after-paragraph}
-	\centering
-	\begin{tabular}{ll}
-		\hline
-		Item & Note \\
-		\hline
-		A & Alpha \\
-		B & Beta \\
-		\hline
-	\end{tabular}
-\end{table}
-
-\vspace{\baselineskip} % UTC: double-space (blank line) after title+table
-
-\subsection{Table immediately after a subheading}
-\label{subsec:table-after-subheading}
-
-% UTC: when title+table immediately follows a subheading, add NO extra blank line before
-
-\begin{table}[!htbp]
-	\caption{Smoke-test table immediately after a subheading}
-	\label{tab:after-subheading}
-	\centering
-	\begin{tabular}{ll}
-		\hline
-		Key & Value \\
-		\hline
-		X & 10 \\
-		Y & 20 \\
-		\hline
-	\end{tabular}
-\end{table}
-
-\vspace{\baselineskip} % UTC: double-space (blank line) after title+table
-
-This paragraph mentions Table~\ref{tab:top-of-page}. The next table is forced to the
-top of the next page so we can verify the usual 1-inch top margin is maintained.
-
-\clearpage
-
-\begin{table}[!htbp]
-	\caption{Smoke-test table at top of page}
-	\label{tab:top-of-page}
-	\centering
-	\begin{tabular}{ll}
-		\hline
-		Field & Example \\
-		\hline
-		Foo & Bar \\
-		Baz & Quux \\
-		\hline
-	\end{tabular}
-\end{table}
-
-
-\section{Abbreviations smoke test}
-\label{sec:abbrev-smoke}
-
-
-This paragraph exists only to exercise acronym behavior in the main matter.
-On first use, \gls{ime} should expand. Later, \gls{ime} should appear in short form.
-Similarly, \gls{ipa} and \gls{nlp} should expand once, then abbreviate thereafter.
-
-Plural behavior: many \glspl{ime} support multilingual input, and many \glspl{ui}
-include accessibility features.
-
-Sentence-initial capitalization check: \Gls{utf} encodings are used widely in modern
-systems.
-
-This final sentence reuses \gls{qwerty} and \gls{ui} to confirm second-use behavior.
-
-% =============================================================================
-% SYMBOLS SMOKE TESTS
-% =============================================================================
-\section{Symbols smoke tests}
-This paragraph exists only to exercise the \emph{symbols} glossary in the main matter.
-We reference the micro symbol \gls{sym:mu} (used in \emph{\gls{ime}} and \emph{\gls{nlp}} discussions),
-its text equivalent \gls{sym:micro}, and the lambda symbol \gls{sym:lambda}.
-
-A common efficiency metric in this dissertation is \gls{sym:gpl} (\emph{gestures per lexeme}).
-For readability, we also use the approximate symbol \gls{sym:approx}.
-
-\section{citations smoke test}
-\label{sec:cite-smoke}
-
-This is a test citation \cite{Wu2007ChordInputImprovements}.
-
-% -----------------------------------------------------------------------------
-% SMOKETEST: List indentation policy
-%   REQUIREMENT:
-%     - Level 1 bullet/number aligns with paragraph indent (0.5in).
-%     - Item text starts 0.25in after the bullet/number.
-%     - Next level bullet/number aligns with previous level text start.
-%     - Each deeper level adds 0.25in.
-%     - Enumerate labels are right-aligned so multi-digit numbers do not shift
-%       the text column.
-%
-%   VISUAL CHECK:
-%     Use a ruler overlay (PDF viewer) or print:
-%       - Level 1 bullet column at 0.5in from left margin
-%       - Level 1 text column at 0.75in
-%       - Level 2 bullet column at 0.75in
-%       - Level 2 text column at 1.0in
-%       - Level 3 bullet column at 1.0in, etc.
-% -----------------------------------------------------------------------------
-
-\section{Smoke Test: List Indentation}
-
-This paragraph is a baseline. Its first-line indent should be exactly 0.5in.
-
-\subsection{Itemize (Bullets)}
-
-This paragraph is body text (double spaced).
-
-\begin{enumerate}
-	\item Level 1 item.
-	\item Long Level 1 item that wraps to verify wrapped lines align under the
-	text column, not under the number label.
-	\begin{enumerate}
-		\item Level 2 item.
-		\item Long Level 2 item that wraps to verify wrapped alignment.
-		\begin{enumerate}
-			\item Level 3 item.
-			\begin{enumerate}
-				\item Level 4 item.
-			\end{enumerate}
-		\end{enumerate}
-	\end{enumerate}
-\end{enumerate}
-
-This paragraph is body text again (double spaced).
-
-\subsection{Enumerate (Numbers)}
-
-This research presents new software to increase user input efficiency for non-QWERTY lexical input sets (lexica), such as accented Latin letters, non-Latin letters, and Chinese words and phrases, all of which are represented in the Unicode (Allen et al., 2012a) character set.
-
-This paragraph is body text (double spaced).
-
-\begin{itemize}
-	\item Level 1 item. Bullet at 0.5in; text at 0.75in.
-	\item Long Level 1 item that wraps to verify wrapped lines align under the
-	text column, not under the bullet.
-	\begin{itemize}
-		\item Level 2 item. Bullet at 0.75in; text at 1.0in.
-		\item Long Level 2 item that wraps to verify alignment at 1.0in.
-		\begin{itemize}
-			\item Level 3 item. Bullet at 1.0in; text at 1.25in.
-			\begin{itemize}
-				\item Level 4 item. Bullet at 1.25in; text at 1.5in.
-			\end{itemize}
-		\end{itemize}
-	\end{itemize}
-\end{itemize}
-
-This paragraph is body text again (double spaced).
-
-
-\subsection{Enumerate: Multi-digit label stress test}
-
-\begin{enumerate}
-	\setcounter{enumi}{8} % start at 9
-	\item Item 9: verify text column alignment.
-	\item Item 10: verify that ``10.'' does NOT push the text start to the right.
-	\item Item 11: same check.
-\end{enumerate}

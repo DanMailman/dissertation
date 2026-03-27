@@ -17,11 +17,12 @@
 	\AbsDedAckPage{ABSTRACT}{\input{frontmatter/abstract.tex}}
 	\AbsDedAckPage{DEDICATION}{\input{frontmatter/dedication.tex}}
 	\AbsDedAckPage{ACKNOWLEDGMENTS}{\input{frontmatter/acknowledgements.tex}}
-	\TableOfContentsPage     % FM-07: TOC
+	    \TableOfContentsPage     % FM-07: TOC
 	\ListOfTablesPage        % FM-08: LOT
 	\ListOfFiguresPage       % FM-09: LOF
 	\ListOfAbbreviationsPage % FM-10: LOA
-	\ListOfSymbolsPage       % FM-11: LOS
+	\ListOfTermsPage         % FM-11: Glossary of Terms
+	\ListOfSymbolsPage       % FM-12: LOS
 	\AddToCChapterLabel
 %	% ============================================================================
 %	% BODY
@@ -29,8 +30,8 @@
 	\MainMatterBegin
 	\glsresetall % Reset “first use” tracking so Chapter I can introduce acronyms cleanly even if they were used in Abstract/Acknowledgements.
 	\include{chapters/ch01-introduction}
-%	\input{chapters/ch02-background}
-%	\input{chapters/ch03-case-study}
+	\input{chapters/ch02-background}
+	\input{chapters/ch03-case-study}
 %	\input{chapters/ch04-algorithm-design}
 %	\input{chapters/ch05-implementation}
 %	\input{chapters/ch06-app-typology}
@@ -45,7 +46,7 @@
 	\appendix
 %	\input{appendices/appA-user-manual}
 %	\input{appendices/appB-another-appendix}
-	\include{appendices/A-smoke-tests}
+%	\include{appendices/A-smoke-tests}
 %	% =========================
 %	% VITA
 %	% =========================
